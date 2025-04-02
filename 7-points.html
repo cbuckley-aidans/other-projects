@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class Hourglass Points System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --class-7A: #E57373; /* Red */
+            --class-7B: #64B5F6; /* Blue */
+            --class-7C: #FFD54F; /* Yellow */
+            --class-7F: #81C784; /* Green */
+            --sand-7A: #ffcdd2;
+            --sand-7B: #bbdefb;
+            --sand-7C: #ffecb3;
+            --sand-7F: #c8e6c9;
+            --background: #f5f7fa;
+            --card-bg: #ffffff;
+            --text: #333333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #2c3e50;
+            color: var(--text);
+            padding: 20px 20px 50px;
+            min-height: 100vh;
+            background-image: linear-gradient(to bottom, #1a2a38, #2c3e50);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            color: white;
+        }
+
+        h1 {
+            font-size: 40px;
+            margin-bottom: 10px;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .subtitle {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 18px;
+        }
+
+        /* Rankings Banner */
+        .rankings-banner {
+            margin-bottom: 50px;
+            position: relative;
+            padding-top: 20px;
+            overflow: visible;
+        }
+
+        .rankings-title {
+            width: 100%;
+            text-align: center;
+            color: white;
+            font-size: 30px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            padding: 15px 0;
+        }
+
+        .rankings-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .ranking-card {
+            background: linear-gradient(to bottom, #34495e, #2c3e50);
+            border-radius: 12px;
+            overflow: visible;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            height: 240px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            padding: 30px 10px 20px;
+            margin-top: 20px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .ranking-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, 
+                rgba(52, 73, 94, 0.6), 
+                rgba(44, 62, 80, 0.8));
+            border-radius: 12px;
+            z-index: 1;
+        }
+        
+        .first-place::before {
+            background: linear-gradient(to bottom, 
+                rgba(58, 97, 134, 0.7), 
+                rgba(27, 59, 111, 0.9));
+        }
+        
+        .second-place::before {
+            background: linear-gradient(to bottom, 
+                rgba(44, 62, 80, 0.7), 
+                rgba(30, 43, 56, 0.9));
+        }
+        
+        .rank-class-container {
+            position: relative;
+            z-index: 2;
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            padding: 8px 16px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin-bottom: 15px;
+        }
+        
+        .rank-position, .trophy-icon, .rank-score {
+            position: relative;
+            z-index: 2;
+        }
+
+        .ranking-card.first-place {
+            background: linear-gradient(to bottom, #3a6186, #1b3b6f);
+            border: 2px solid rgba(255, 215, 0, 0.5);
+            animation: pulse 2s infinite;
+            transform: scale(1.05);
+            z-index: 10;
+        }
+
+        .ranking-card.second-place {
+            background: linear-gradient(to bottom, #2c3e50, #1e2b38);
+            z-index: 9;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(255, 215, 0, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); }
+        }
+
+        .rank-position {
+            position: absolute;
+            top: -20px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 22px;
+            color: #333;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
+            border: 2px solid rgba(255, 255, 255, 0.8);
+        }
+
+        .rank-first { 
+            background: linear-gradient(to bottom right, #ffeb3b, #ffc107);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
+        }
+        .rank-second { background: linear-gradient(to bottom right, #e0e0e0, #bdbdbd); }
+        .rank-third { background: linear-gradient(to bottom right, #d7ccc8, #a1887f); }
+        .rank-fourth { background: linear-gradient(to bottom right, #cfd8dc, #90a4ae); }
+
+        .trophy-icon {
+            color: gold;
+            font-size: 36px;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+            margin-bottom: 10px;
+        }
+
+        .rank-class {
+            color: white;
+            font-weight: bold;
+            font-size: 24px;
+            margin: 5px 0 15px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        .rank-score {
+            background-color: rgba(0, 0, 0, 0.3);
+            color: white;
+            font-size: 18px;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
+        }
+        
+        .first-place .rank-class {
+            font-size: 26px;
+            color: rgba(255, 255, 255, 1);
+        }
+        
+        .first-place .rank-score {
+            background-color: rgba(255, 215, 0, 0.3);
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+        }
+        
+        @media (max-width: 768px) {
+            .rankings-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 30px 10px;
+            }
+            
+            .rank-class {
+                font-size: 20px;
+            }
+            
+            .first-place .rank-class {
+                font-size: 22px;
+            }
+            
+            .ranking-card {
+                height: 180px;
+            }
+        }
+
+        /* Hourglass Grid */
+        .hourglass-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        /* Hourglass */
+        .hourglass-card {
+            background-color: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            overflow: hidden;
+            text-align: center;
+            padding: 25px 20px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .hourglass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 0;
+        }
+        
+        .class-title-container {
+            position: relative;
+            z-index: 2;
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            display: inline-block;
+            padding: 8px 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .class-title {
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: 24px;
+            font-weight: 700;
+            color: white;
+        }
+        
+        .hourglass-container, .points-value, .points-label, .controls {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hourglass-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .class-title {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .class-badge {
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .badge-7A { background-color: var(--class-7A); color: white; }
+        .badge-7B { background-color: var(--class-7B); color: white; }
+        .badge-7C { background-color: var(--class-7C); color: #333; }
+        .badge-7F { background-color: var(--class-7F); color: white; }
+
+        .hourglass-container {
+            position: relative;
+            height: 240px;
+            width: 140px;
+            margin: 0 auto 20px;
+        }
+
+        .hourglass {
+            position: relative;
+            height: 100%;
+            width: 100%;
+        }
+
+        .hourglass-outline {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 140 240'%3E%3Cpath fill='none' stroke='rgba(255,255,255,0.7)' stroke-width='3' d='M20,10 L120,10 L120,50 C120,90 70,100 70,120 C70,140 120,150 120,190 L120,230 L20,230 L20,190 C20,150 70,140 70,120 C70,100 20,90 20,50 L20,10 Z' /%3E%3C/svg%3E");
+            background-size: contain;
+            background-repeat: no-repeat;
+            z-index: 2;
+        }
+
+        .hourglass-top, .hourglass-bottom {
+            position: absolute;
+            left: 20px;
+            width: 100px;
+            border-radius: 5px;
+            overflow: hidden;
+            transition: height 1s ease;
+        }
+
+        .hourglass-top {
+            top: 10px;
+            height: 110px;
+            clip-path: polygon(0 0, 100% 0, 100% 70%, 50% 100%, 0 70%);
+        }
+
+        .hourglass-bottom {
+            bottom: 10px;
+            height: 0px;
+            clip-path: polygon(0 30%, 50% 0, 100% 30%, 100% 100%, 0 100%);
+        }
+
+        .hourglass-7A .hourglass-top { background-color: var(--sand-7A); }
+        .hourglass-7A .hourglass-bottom { background-color: var(--sand-7A); }
+        .hourglass-7B .hourglass-top { background-color: var(--sand-7B); }
+        .hourglass-7B .hourglass-bottom { background-color: var(--sand-7B); }
+        .hourglass-7C .hourglass-top { background-color: var(--sand-7C); }
+        .hourglass-7C .hourglass-bottom { background-color: var(--sand-7C); }
+        .hourglass-7F .hourglass-top { background-color: var(--sand-7F); }
+        .hourglass-7F .hourglass-bottom { background-color: var(--sand-7F); }
+
+        .points-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 5px;
+        }
+
+        .points-7A { color: var(--class-7A); }
+        .points-7B { color: var(--class-7B); }
+        .points-7C { color: var(--class-7C); }
+        .points-7F { color: var(--class-7F); }
+
+        .points-label {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-minus {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+        }
+
+        .btn-plus {
+            color: white;
+        }
+
+        .btn-7A { background-color: var(--class-7A); }
+        .btn-7B { background-color: var(--class-7B); }
+        .btn-7C { background-color: var(--class-7C); color: #333; }
+        .btn-7F { background-color: var(--class-7F); }
+
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn:active {
+            transform: scale(0.95);
+        }
+
+        .sound-btn-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .sound-btn {
+            background-color: rgba(76, 175, 80, 0.7);
+            color: white;
+            border: 2px solid rgba(76, 175, 80, 0.3);
+            padding: 15px 30px;
+            font-size: 20px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        .sound-btn:hover {
+            background-color: rgba(76, 175, 80, 0.9);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .sound-btn:active {
+            transform: translateY(1px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .snape-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            overflow: hidden;
+            background-image: url('https://i.insider.com/5f47e7c9cd2fec00296a497a?width=800&format=jpeg&auto=webp');
+            background-size: cover;
+            background-position: center;
+            border: 2px solid white;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            z-index: 5;
+        }
+        
+        .sound-btn:hover .snape-icon {
+            transform: scale(3.5) translateY(-40px);
+            border: 3px solid white;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        .sound-btn:hover .snape-icon::after {
+            content: "Severus Snape";
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 10px;
+            font-size: 8px;
+            white-space: nowrap;
+            opacity: 1;
+        }
+
+        footer {
+            margin-top: 50px;
+            padding: 15px;
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+        }
+
+        .reset-btn {
+            background-color: rgba(244, 67, 54, 0.7);
+            color: white;
+            border: 2px solid rgba(244, 67, 54, 0.3);
+            padding: 6px 12px;
+            font-size: 12px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .reset-btn:hover {
+            background-color: rgba(244, 67, 54, 0.9);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Modal Styles */
+        .modal-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .modal-backdrop.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal {
+            background-color: #2c3e50;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 450px;
+            padding: 25px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .modal-backdrop.show .modal {
+            transform: scale(1);
+        }
+        
+        .modal-title {
+            color: white;
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .modal-content {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 25px;
+            text-align: center;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+        
+        .modal-actions {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .modal-btn {
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s ease;
+        }
+        
+        .btn-cancel {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .btn-confirm {
+            background-color: rgba(244, 67, 54, 0.8);
+            color: white;
+        }
+        
+        .modal-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        /* For animations */
+        @keyframes sandFall {
+            0% { opacity: 1; transform: translateY(0); }
+            100% { opacity: 0; transform: translateY(60px); }
+        }
+
+        .sand-particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            z-index: 1;
+            animation: sandFall 1s forwards;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .hourglass-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 20px;
+            }
+
+            h1 {
+                font-size: 32px;
+            }
+
+            .hourglass-container {
+                height: 200px;
+                width: 120px;
+            }
+
+            .ranking-podium {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .podium-step {
+                min-width: 45%;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Class Points</h1>
+        </header>
+
+        <!-- Rankings Banner -->
+        <div class="rankings-banner">
+            <div class="rankings-title">Current Class Rankings</div>
+            <div class="rankings-grid" id="rankings-grid">
+                <!-- Will be populated by JavaScript -->
+            </div>
+        </div>
+
+        <div class="hourglass-grid">
+            <!-- Class 7A Hourglass -->
+            <div class="hourglass-card" style="background-image: url('https://i.ytimg.com/vi/_efR484JBzQ/hqdefault.jpg');">
+                <div class="class-title-container">
+                    <div class="class-title">
+                        Class 7A
+                        <span class="class-badge badge-7A" id="rank-7A">#1</span>
+                    </div>
+                </div>
+                <div class="hourglass-container">
+                    <div class="hourglass hourglass-7A">
+                        <div class="hourglass-top" id="top-7A"></div>
+                        <div class="hourglass-bottom" id="bottom-7A"></div>
+                        <div class="hourglass-outline"></div>
+                    </div>
+                </div>
+                <div class="points-value points-7A" id="score-7A">0</div>
+                <div class="points-label">Total Points</div>
+                <div class="controls">
+                    <button class="btn btn-minus" onclick="updatePoints('7A', -5)">-5</button>
+                    <button class="btn btn-plus btn-7A" onclick="updatePoints('7A', 5)">+5</button>
+                </div>
+            </div>
+
+            <!-- Class 7B Hourglass -->
+            <div class="hourglass-card" style="background-image: url('https://media.istockphoto.com/id/473012660/photo/grey-squirrel-yawning.jpg?s=612x612&w=0&k=20&c=5zyoQOLrCBtQpJH7U-dIU7y5BJN9DAiGED3t879u2RQ=');">
+                <div class="class-title-container">
+                    <div class="class-title">
+                        Class 7B
+                        <span class="class-badge badge-7B" id="rank-7B">#2</span>
+                    </div>
+                </div>
+                <div class="hourglass-container">
+                    <div class="hourglass hourglass-7B">
+                        <div class="hourglass-top" id="top-7B"></div>
+                        <div class="hourglass-bottom" id="bottom-7B"></div>
+                        <div class="hourglass-outline"></div>
+                    </div>
+                </div>
+                <div class="points-value points-7B" id="score-7B">0</div>
+                <div class="points-label">Total Points</div>
+                <div class="controls">
+                    <button class="btn btn-minus" onclick="updatePoints('7B', -5)">-5</button>
+                    <button class="btn btn-plus btn-7B" onclick="updatePoints('7B', 5)">+5</button>
+                </div>
+            </div>
+
+            <!-- Class 7C Hourglass -->
+            <div class="hourglass-card" style="background-image: url('https://media.istockphoto.com/id/104254994/photo/close-up-of-angry-chihuahua-growling.jpg?s=612x612&w=0&k=20&c=pbTEeKuXXxN90jpU9A4tmDdYXFZ24lVZa3ZGoixeAOQ=');">
+                <div class="class-title-container">
+                    <div class="class-title">
+                        Class 7C
+                        <span class="class-badge badge-7C" id="rank-7C">#3</span>
+                    </div>
+                </div>
+                <div class="hourglass-container">
+                    <div class="hourglass hourglass-7C">
+                        <div class="hourglass-top" id="top-7C"></div>
+                        <div class="hourglass-bottom" id="bottom-7C"></div>
+                        <div class="hourglass-outline"></div>
+                    </div>
+                </div>
+                <div class="points-value points-7C" id="score-7C">0</div>
+                <div class="points-label">Total Points</div>
+                <div class="controls">
+                    <button class="btn btn-minus" onclick="updatePoints('7C', -5)">-5</button>
+                    <button class="btn btn-plus btn-7C" onclick="updatePoints('7C', 5)">+5</button>
+                </div>
+            </div>
+
+            <!-- Class 7F Hourglass -->
+            <div class="hourglass-card" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZjc9qcew_8DzSVm8gh9iGN3UEHQxqzSPa7A&s');">
+                <div class="class-title-container">
+                    <div class="class-title">
+                        Class 7F
+                        <span class="class-badge badge-7F" id="rank-7F">#4</span>
+                    </div>
+                </div>
+                <div class="hourglass-container">
+                    <div class="hourglass hourglass-7F">
+                        <div class="hourglass-top" id="top-7F"></div>
+                        <div class="hourglass-bottom" id="bottom-7F"></div>
+                        <div class="hourglass-outline"></div>
+                    </div>
+                </div>
+                <div class="points-value points-7F" id="score-7F">0</div>
+                <div class="points-label">Total Points</div>
+                <div class="controls">
+                    <button class="btn btn-minus" onclick="updatePoints('7F', -5)">-5</button>
+                    <button class="btn btn-plus btn-7F" onclick="updatePoints('7F', 5)">+5</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="sound-btn-container">
+            <button class="sound-btn" onclick="playSound()">
+                <div class="snape-icon"></div> Snape
+            </button>
+        </div>
+        
+        <!-- Reset Confirmation Modal -->
+        <div class="modal-backdrop" id="resetModal">
+            <div class="modal">
+                <div class="modal-title">
+                    <i class="fas fa-exclamation-triangle"></i> Reset All Points
+                </div>
+                <div class="modal-content">
+                    Are you sure you want to reset all class points? This action cannot be undone and will clear all hourglasses.
+                </div>
+                <div class="modal-actions">
+                    <button class="modal-btn btn-cancel" onclick="hideResetModal()">Cancel</button>
+                    <button class="modal-btn btn-confirm" onclick="confirmReset()">Yes, Reset All</button>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <button class="reset-btn" onclick="showResetModal()">
+                <i class="fas fa-redo-alt"></i> Reset Points
+            </button>
+        </footer>
+    </div>
+
+    <script>
+        // Maximum points to completely fill the hourglass (for scaling)
+        const MAX_POINTS = 200;
+        
+        // Initialize or get stored points
+        let scores = {
+            '7A': parseInt(localStorage.getItem('points-7A')) || 0,
+            '7B': parseInt(localStorage.getItem('points-7B')) || 0,
+            '7C': parseInt(localStorage.getItem('points-7C')) || 0,
+            '7F': parseInt(localStorage.getItem('points-7F')) || 0
+        };
+
+        // Initialize the UI
+        document.addEventListener('DOMContentLoaded', function() {
+            // Update scores display
+            for (const classId in scores) {
+                updateDisplay(classId);
+            }
+            // Update rankings
+            updateRankings();
+        });
+
+        // Update points for a class
+        function updatePoints(classId, amount) {
+            const oldScore = scores[classId];
+            scores[classId] += amount;
+            
+            // Don't allow negative scores
+            if (scores[classId] < 0) {
+                scores[classId] = 0;
+            }
+            
+            // Store updated score
+            localStorage.setItem(`points-${classId}`, scores[classId]);
+            
+            // Update the display
+            updateDisplay(classId);
+            
+            // Create sand animation if adding points
+            if (amount > 0) {
+                createSandAnimation(classId);
+            }
+            
+            // Update rankings
+            updateRankings();
+        }
+
+        // Update the display for a specific class
+        function updateDisplay(classId) {
+            // Update score display
+            const scoreElement = document.getElementById(`score-${classId}`);
+            scoreElement.textContent = scores[classId];
+            
+            // Update hourglass fill
+            updateHourglassFill(classId);
+        }
+
+        // Update hourglass fill levels
+        function updateHourglassFill(classId) {
+            // Calculate percentage filled (capped at 100%)
+            const fillPercentage = Math.min(scores[classId] / MAX_POINTS, 1);
+            
+            // Inverse for top (starts full, empties as score increases)
+            const topHeightPercent = (1 - fillPercentage) * 100;
+            
+            // Bottom fills as score increases
+            const bottomHeightPercent = fillPercentage * 100;
+            
+            // Update the hourglass elements
+            const topElement = document.getElementById(`top-${classId}`);
+            const bottomElement = document.getElementById(`bottom-${classId}`);
+            
+            // Apply the height changes
+            topElement.style.height = `${topHeightPercent}px`;
+            bottomElement.style.height = `${bottomHeightPercent}px`;
+        }
+
+        // Create sand falling animation
+        function createSandAnimation(classId) {
+            const hourglass = document.querySelector(`.hourglass-${classId}`);
+            const hourglassRect = hourglass.getBoundingClientRect();
+            
+            // Create sand particles
+            for (let i = 0; i < 5; i++) {
+                setTimeout(() => {
+                    const particle = document.createElement('div');
+                    particle.classList.add('sand-particle');
+                    
+                    // Set color based on class
+                    particle.style.backgroundColor = getComputedStyle(document.documentElement).getPropertyValue(`--sand-${classId}`);
+                    
+                    // Position at the middle neck of the hourglass
+                    particle.style.left = `${hourglassRect.width / 2 - 3 + (Math.random() * 6 - 3)}px`;
+                    particle.style.top = `${hourglassRect.height / 2 - 3}px`;
+                    
+                    hourglass.appendChild(particle);
+                    
+                    // Remove particle after animation completes
+                    setTimeout(() => {
+                        particle.remove();
+                    }, 1000);
+                }, i * 200);
+            }
+        }
+
+        // Play sound function
+        function playSound() {
+            // Create an audio element to play the sound
+            fetch('snape.html')
+                .then(response => {
+                    if (!response.ok) {
+                        console.error('Failed to load sound file');
+                        alert('Failed to load sound file');
+                    }
+                    return response.blob();
+                })
+                .then(blob => {
+                    const audioURL = URL.createObjectURL(blob);
+                    const audio = new Audio(audioURL);
+                    audio.play()
+                        .catch(err => {
+                            console.error('Error playing sound:', err);
+                            alert('Error playing sound: ' + err.message);
+                        });
+                })
+                .catch(err => {
+                    console.error('Error fetching sound file:', err);
+                    alert('Error fetching sound file: ' + err.message);
+                });
+        }
+        
+        // Show reset confirmation modal
+        function showResetModal() {
+            const modal = document.getElementById('resetModal');
+            modal.classList.add('show');
+        }
+        
+        // Hide reset confirmation modal
+        function hideResetModal() {
+            const modal = document.getElementById('resetModal');
+            modal.classList.remove('show');
+        }
+        
+        // Reset all points (after confirmation)
+        function confirmReset() {
+            for (const classId in scores) {
+                scores[classId] = 0;
+                localStorage.setItem(`points-${classId}`, 0);
+                updateDisplay(classId);
+            }
+            updateRankings();
+            hideResetModal();
+        }
+        
+        // Update rankings
+        function updateRankings() {
+            // Sort classes by score
+            const sortedClasses = Object.entries(scores)
+                .sort((a, b) => b[1] - a[1])
+                .map(([classId, score], index) => ({ classId, score, rank: index + 1 }));
+            
+            // Handle ties by giving the same rank
+            for (let i = 1; i < sortedClasses.length; i++) {
+                if (sortedClasses[i].score === sortedClasses[i-1].score) {
+                    sortedClasses[i].rank = sortedClasses[i-1].rank;
+                }
+            }
+            
+            // Update rank badges on cards
+            for (const { classId, rank } of sortedClasses) {
+                const rankElement = document.getElementById(`rank-${classId}`);
+                rankElement.textContent = `#${rank}`;
+            }
+            
+            // Update rankings grid display
+            const rankingsContainer = document.getElementById('rankings-grid');
+            rankingsContainer.innerHTML = '';
+            
+            // Create ranking cards
+            sortedClasses.forEach(({ classId, score, rank }) => {
+                // Create ranking card
+                const rankCard = document.createElement('div');
+                rankCard.classList.add('ranking-card');
+                
+                // Add special class for first and second place
+                if (rank === 1) rankCard.classList.add('first-place');
+                if (rank === 2) rankCard.classList.add('second-place');
+                
+                // Add trophy for first place
+                let trophyHtml = rank === 1 ? '<div class="trophy-icon"><i class="fas fa-trophy"></i></div>' : '';
+                
+                rankCard.style.backgroundImage = `url('/api/placeholder/400/400')`;
+            
+            rankCard.innerHTML = `
+                    <div class="rank-position rank-${getRankClass(rank)}">${rank}</div>
+                    ${trophyHtml}
+                    <div class="rank-class-container">
+                        <div class="rank-class">Class ${classId}</div>
+                    </div>
+                    <div class="rank-score">${score} points</div>
+                `;
+                
+                rankingsContainer.appendChild(rankCard);
+            });
+            
+            // Helper function to get rank class
+            function getRankClass(rank) {
+                const rankClasses = ['first', 'second', 'third', 'fourth'];
+                return rankClasses[rank - 1] || 'fourth';
+            }
+        }
+    </script>
+</body>
+</html>
