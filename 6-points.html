@@ -1,0 +1,1547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Year 6 Class Points</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="manifest" href="site.webmanifest">
+    <style>
+        :root {
+            --class-6D: #9c27b0; /* Purple */
+            --class-6J: #ff9800; /* Orange */
+            --class-6M: #009688; /* Teal */
+            --sand-6D: #e1bee7;
+            --sand-6J: #ffe0b2;
+            --sand-6M: #b2dfdb;
+            --background: #f5f7fa;
+            --card-bg: #ffffff;
+            --text: #333333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #2c3e50;
+            color: var(--text);
+            padding: 20px 20px 50px;
+            min-height: 100vh;
+            background-image: linear-gradient(to bottom, #1a2a38, #2c3e50);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            color: white;
+        }
+
+        h1 {
+            font-size: 40px;
+            margin-bottom: 10px;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .subtitle {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 18px;
+        }
+
+        /* Rankings Banner */
+        .rankings-banner {
+            margin-bottom: 50px;
+            position: relative;
+            padding-top: 20px;
+            overflow: visible;
+        }
+
+        .rankings-title {
+            width: 100%;
+            text-align: center;
+            color: white;
+            font-size: 30px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            padding: 15px 0;
+        }
+
+        .rankings-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .ranking-card {
+            background: linear-gradient(to bottom, #34495e, #2c3e50);
+            border-radius: 12px;
+            overflow: visible;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            height: 240px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            padding: 30px 10px 20px;
+            margin-top: 20px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .ranking-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, 
+                rgba(52, 73, 94, 0.6), 
+                rgba(44, 62, 80, 0.8));
+            border-radius: 12px;
+            z-index: 1;
+        }
+        
+        .first-place::before {
+            background: linear-gradient(to bottom, 
+                rgba(58, 97, 134, 0.7), 
+                rgba(27, 59, 111, 0.9));
+        }
+        
+        .second-place::before {
+            background: linear-gradient(to bottom, 
+                rgba(44, 62, 80, 0.7), 
+                rgba(30, 43, 56, 0.9));
+        }
+        
+        .rank-class-container {
+            position: relative;
+            z-index: 2;
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            padding: 8px 16px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin-bottom: 15px;
+        }
+        
+        .rank-position, .trophy-icon, .rank-score {
+            position: relative;
+            z-index: 2;
+        }
+
+        .ranking-card.first-place {
+            background: linear-gradient(to bottom, #3a6186, #1b3b6f);
+            border: 2px solid rgba(255, 215, 0, 0.5);
+            animation: pulse 2s infinite;
+            transform: scale(1.05);
+            z-index: 10;
+        }
+
+        .ranking-card.second-place {
+            background: linear-gradient(to bottom, #2c3e50, #1e2b38);
+            z-index: 9;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(255, 215, 0, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); }
+        }
+
+        .rank-position {
+            position: absolute;
+            top: -20px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 22px;
+            color: #333;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
+            border: 2px solid rgba(255, 255, 255, 0.8);
+        }
+
+        .rank-first { 
+            background: linear-gradient(to bottom right, #ffeb3b, #ffc107);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
+        }
+        .rank-second { background: linear-gradient(to bottom right, #e0e0e0, #bdbdbd); }
+        .rank-third { background: linear-gradient(to bottom right, #d7ccc8, #a1887f); }
+
+        .trophy-icon {
+            color: gold;
+            font-size: 36px;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+            margin-bottom: 10px;
+        }
+
+        .rank-class {
+            color: white;
+            font-weight: bold;
+            font-size: 24px;
+            margin: 5px 0 15px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        .rank-score {
+            background-color: rgba(0, 0, 0, 0.3);
+            color: white;
+            font-size: 18px;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
+        }
+        
+        .first-place .rank-class {
+            font-size: 26px;
+            color: rgba(255, 255, 255, 1);
+        }
+        
+        .first-place .rank-score {
+            background-color: rgba(255, 215, 0, 0.3);
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+        }
+        
+        @media (max-width: 768px) {
+            .rankings-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 30px 10px;
+            }
+            
+            .rank-class {
+                font-size: 20px;
+            }
+            
+            .first-place .rank-class {
+                font-size: 22px;
+            }
+            
+            .ranking-card {
+                height: 180px;
+            }
+        }
+
+        /* Activity Feed */
+        .activity-feed {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 40px;
+            max-height: 200px;
+            overflow-y: auto;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .activity-title {
+            text-align: center;
+            color: white;
+            font-size: 24px;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .activity-list {
+            list-style: none;
+        }
+        
+        .activity-item {
+            padding: 8px 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+        
+        .activity-item i {
+            margin-right: 10px;
+            color: #ffc107;
+        }
+        
+        .activity-time {
+            margin-left: auto;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .activity-points {
+            margin-left: 10px;
+            font-weight: bold;
+        }
+        
+        .activity-points.positive {
+            color: #4CAF50;
+        }
+        
+        .activity-points.negative {
+            color: #F44336;
+        }
+
+        /* Hourglass Grid - 3 COLUMNS */
+        .hourglass-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        /* Hourglass */
+        .hourglass-card {
+            background-color: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            overflow: hidden;
+            text-align: center;
+            padding: 25px 20px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .hourglass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 0;
+        }
+        
+        .class-title-container {
+            position: relative;
+            z-index: 2;
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            display: inline-block;
+            padding: 8px 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .class-title {
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: 24px;
+            font-weight: 700;
+            color: white;
+        }
+        
+        .hourglass-container, .points-value, .points-label, .controls, .custom-points {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hourglass-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .class-title {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .class-badge {
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .badge-6D { background-color: var(--class-6D); color: white; }
+        .badge-6J { background-color: var(--class-6J); color: #333; }
+        .badge-6M { background-color: var(--class-6M); color: white; }
+
+        .hourglass-container {
+            position: relative;
+            height: 240px;
+            width: 140px;
+            margin: 0 auto 20px;
+        }
+
+        .hourglass {
+            position: relative;
+            height: 100%;
+            width: 100%;
+        }
+
+        .hourglass-outline {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 140 240'%3E%3Cpath fill='none' stroke='rgba(255,255,255,0.7)' stroke-width='3' d='M20,10 L120,10 L120,50 C120,90 70,100 70,120 C70,140 120,150 120,190 L120,230 L20,230 L20,190 C20,150 70,140 70,120 C70,100 20,90 20,50 L20,10 Z' /%3E%3C/svg%3E");
+            background-size: contain;
+            background-repeat: no-repeat;
+            z-index: 2;
+        }
+
+        .hourglass-top, .hourglass-bottom {
+            position: absolute;
+            left: 20px;
+            width: 100px;
+            border-radius: 5px;
+            overflow: hidden;
+            transition: height 1s ease;
+        }
+
+        .hourglass-top {
+            top: 10px;
+            height: 110px;
+            clip-path: polygon(0 0, 100% 0, 100% 70%, 50% 100%, 0 70%);
+        }
+
+        .hourglass-bottom {
+            bottom: 10px;
+            height: 0px;
+            clip-path: polygon(0 30%, 50% 0, 100% 30%, 100% 100%, 0 100%);
+        }
+
+        .hourglass-6D .hourglass-top { background-color: var(--sand-6D); }
+        .hourglass-6D .hourglass-bottom { background-color: var(--sand-6D); }
+        .hourglass-6J .hourglass-top { background-color: var(--sand-6J); }
+        .hourglass-6J .hourglass-bottom { background-color: var(--sand-6J); }
+        .hourglass-6M .hourglass-top { background-color: var(--sand-6M); }
+        .hourglass-6M .hourglass-bottom { background-color: var(--sand-6M); }
+
+        .points-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 5px;
+        }
+        
+        .points-value.pulse {
+            animation: pointsPulse 0.5s ease-out;
+        }
+        
+        @keyframes pointsPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        .points-6D { color: var(--class-6D); }
+        .points-6J { color: var(--class-6J); }
+        .points-6M { color: var(--class-6M); }
+
+        .points-label {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+        
+        /* Custom Points Input */
+        .custom-points {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+        
+        .points-input {
+            width: 60px;
+            padding: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background-color: rgba(0, 0, 0, 0.3);
+            color: white;
+            border-radius: 4px;
+            text-align: center;
+            font-size: 16px;
+            margin: 0 5px;
+        }
+        
+        .points-input:focus {
+            outline: none;
+            border-color: #ffc107;
+            box-shadow: 0 0 5px rgba(255, 193, 7, 0.5);
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-minus {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+        }
+
+        .btn-plus {
+            color: white;
+        }
+
+        .btn-award {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 2px solid #ffc107;
+            color: #ffc107;
+        }
+
+        .btn-6D { background-color: var(--class-6D); }
+        .btn-6J { background-color: var(--class-6J); color: #333; }
+        .btn-6M { background-color: var(--class-6M); }
+
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn:active {
+            transform: scale(0.95);
+        }
+
+        .sound-btn-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .sound-btn {
+            background-color: rgba(76, 175, 80, 0.7);
+            color: white;
+            border: 2px solid rgba(76, 175, 80, 0.3);
+            padding: 15px 30px;
+            font-size: 20px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        .sound-btn:hover {
+            background-color: rgba(76, 175, 80, 0.9);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .sound-btn:active {
+            transform: translateY(1px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .snape-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            overflow: hidden;
+            background-image: url('https://i.insider.com/5f47e7c9cd2fec00296a497a?width=800&format=jpeg&auto=webp');
+            background-size: cover;
+            background-position: center;
+            border: 2px solid white;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            z-index: 5;
+        }
+        
+        .sound-btn:hover .snape-icon {
+            transform: scale(3.5) translateY(-40px);
+            border: 3px solid white;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        .sound-btn:hover .snape-icon::after {
+            content: "Severus Snape";
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 10px;
+            font-size: 8px;
+            white-space: nowrap;
+            opacity: 1;
+        }
+
+        footer {
+            margin-top: 50px;
+            padding: 15px;
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+        }
+
+        .reset-btn {
+            background-color: rgba(244, 67, 54, 0.7);
+            color: white;
+            border: 2px solid rgba(244, 67, 54, 0.3);
+            padding: 6px 12px;
+            font-size: 12px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .reset-btn:hover {
+            background-color: rgba(244, 67, 54, 0.9);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Data Export/Import */
+        .data-actions {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .btn-export, .btn-import {
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 8px 15px;
+            font-size: 14px;
+            font-weight: 500;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-export:hover, .btn-import:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            border-color: #ffc107;
+        }
+        
+        /* Modal Styles */
+        .modal-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .modal-backdrop.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal {
+            background-color: #2c3e50;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 450px;
+            padding: 25px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .modal-backdrop.show .modal {
+            transform: scale(1);
+        }
+        
+        .modal-title {
+            color: white;
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .modal-content {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 25px;
+            text-align: center;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+        
+        .modal-actions {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .modal-btn {
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s ease;
+        }
+        
+        .btn-cancel {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .btn-confirm {
+            background-color: rgba(244, 67, 54, 0.8);
+            color: white;
+        }
+        
+        .modal-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Award Modal */
+        .award-modal .modal {
+            max-width: 500px;
+        }
+        
+        .award-form {
+            margin-bottom: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 5px;
+            color: white;
+            font-weight: 600;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background-color: rgba(0, 0, 0, 0.3);
+            color: white;
+            font-size: 16px;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: #ffc107;
+        }
+        
+        .form-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='white' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            padding-right: 30px;
+        }
+        
+        .form-points {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .form-points input {
+            width: 80px;
+        }
+        
+        .points-label {
+            color: white;
+        }
+
+        /* For animations */
+        @keyframes sandFall {
+            0% { opacity: 1; transform: translateY(0); }
+            100% { opacity: 0; transform: translateY(60px); }
+        }
+
+        .sand-particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            z-index: 1;
+            animation: sandFall 1s forwards;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .hourglass-grid {
+                grid-template-columns: repeat(1, 1fr);
+                gap: 20px;
+            }
+
+            h1 {
+                font-size: 32px;
+            }
+
+            .hourglass-container {
+                height: 200px;
+                width: 120px;
+            }
+
+            .ranking-podium {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .podium-step {
+                min-width: 45%;
+                margin-bottom: 10px;
+            }
+            
+            .rankings-grid {
+                grid-template-columns: repeat(1, 1fr);
+                gap: 30px 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Class Points</h1>
+        </header>
+
+        <!-- Rankings Banner -->
+        <div class="rankings-banner">
+            <div class="rankings-title">Current Class Rankings</div>
+            <div class="rankings-grid" id="rankings-grid">
+                <!-- Will be populated by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Activity Feed -->
+        <div class="activity-feed">
+            <div class="activity-title">Recent Activity</div>
+            <ul class="activity-list" id="activity-list">
+                <!-- Will be filled by JavaScript -->
+            </ul>
+        </div>
+
+        <div class="hourglass-grid">
+            <!-- Class 6D Hourglass -->
+            <div class="hourglass-card" style="background-image: url('https://i.ytimg.com/vi/_efR484JBzQ/hqdefault.jpg');">
+                <div class="class-title-container">
+                    <div class="class-title">
+                        Class 6D
+                        <span class="class-badge badge-6D" id="rank-6D">#1</span>
+                    </div>
+                </div>
+                <div class="hourglass-container">
+                    <div class="hourglass hourglass-6D">
+                        <div class="hourglass-top" id="top-6D"></div>
+                        <div class="hourglass-bottom" id="bottom-6D"></div>
+                        <div class="hourglass-outline"></div>
+                    </div>
+                </div>
+                <div class="points-value points-6D" id="score-6D">0</div>
+                <div class="points-label">Total Points</div>
+                <div class="custom-points">
+                    <input type="number" class="points-input" id="custom-points-6D" min="1" max="50" value="5">
+                </div>
+                <div class="controls">
+                    <button class="btn btn-minus" onclick="updatePoints('6D', 'subtract')">-</button>
+                    <button class="btn btn-plus btn-6D" onclick="updatePoints('6D', 'add')">+</button>
+                    <button class="btn btn-award" onclick="showAwardModal('6D')">
+                        <i class="fas fa-award"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Class 6J Hourglass -->
+            <div class="hourglass-card" style="background-image: url('https://media.istockphoto.com/id/473012660/photo/grey-squirrel-yawning.jpg?s=612x612&w=0&k=20&c=5zyoQOLrCBtQpJH7U-dIU7y5BJN9DAiGED3t879u2RQ=');">
+                <div class="class-title-container">
+                    <div class="class-title">
+                        Class 6J
+                        <span class="class-badge badge-6J" id="rank-6J">#2</span>
+                    </div>
+                </div>
+                <div class="hourglass-container">
+                    <div class="hourglass hourglass-6J">
+                        <div class="hourglass-top" id="top-6J"></div>
+                        <div class="hourglass-bottom" id="bottom-6J"></div>
+                        <div class="hourglass-outline"></div>
+                    </div>
+                </div>
+                <div class="points-value points-6J" id="score-6J">0</div>
+                <div class="points-label">Total Points</div>
+                <div class="custom-points">
+                    <input type="number" class="points-input" id="custom-points-6J" min="1" max="50" value="5">
+                </div>
+                <div class="controls">
+                    <button class="btn btn-minus" onclick="updatePoints('6J', 'subtract')">-</button>
+                    <button class="btn btn-plus btn-6J" onclick="updatePoints('6J', 'add')">+</button>
+                    <button class="btn btn-award" onclick="showAwardModal('6J')">
+                        <i class="fas fa-award"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Class 6M Hourglass -->
+            <div class="hourglass-card" style="background-image: url('https://media.istockphoto.com/id/104254994/photo/close-up-of-angry-chihuahua-growling.jpg?s=612x612&w=0&k=20&c=pbTEeKuXXxN90jpU9A4tmDdYXFZ24lVZa3ZGoixeAOQ=');">
+                <div class="class-title-container">
+                    <div class="class-title">
+                        Class 6M
+                        <span class="class-badge badge-6M" id="rank-6M">#3</span>
+                    </div>
+                </div>
+                <div class="hourglass-container">
+                    <div class="hourglass hourglass-6M">
+                        <div class="hourglass-top" id="top-6M"></div>
+                        <div class="hourglass-bottom" id="bottom-6M"></div>
+                        <div class="hourglass-outline"></div>
+                    </div>
+                </div>
+                <div class="points-value points-6M" id="score-6M">0</div>
+                <div class="points-label">Total Points</div>
+                <div class="custom-points">
+                    <input type="number" class="points-input" id="custom-points-6M" min="1" max="50" value="5">
+                </div>
+                <div class="controls">
+                    <button class="btn btn-minus" onclick="updatePoints('6M', 'subtract')">-</button>
+                    <button class="btn btn-plus btn-6M" onclick="updatePoints('6M', 'add')">+</button>
+                    <button class="btn btn-award" onclick="showAwardModal('6M')">
+                        <i class="fas fa-award"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="sound-btn-container">
+            <button class="sound-btn" onclick="playSound()">
+                <div class="snape-icon"></div> Snape
+            </button>
+        </div>
+        
+        <!-- Reset Confirmation Modal -->
+        <div class="modal-backdrop" id="resetModal">
+            <div class="modal">
+                <div class="modal-title">
+                    <i class="fas fa-exclamation-triangle"></i> Reset All Points
+                </div>
+                <div class="modal-content">
+                    Are you sure you want to reset all class points? This action cannot be undone and will clear all hourglasses.
+                </div>
+                <div class="modal-actions">
+                    <button class="modal-btn btn-cancel" onclick="hideResetModal()">Cancel</button>
+                    <button class="modal-btn btn-confirm" onclick="confirmReset()">Yes, Reset All</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Award Modal -->
+        <div class="modal-backdrop award-modal" id="awardModal">
+            <div class="modal">
+                <div class="modal-title">Award Special Points</div>
+                <div class="modal-content">
+                    Recognize outstanding achievements with special points.
+                </div>
+                <form class="award-form" id="award-form">
+                    <input type="hidden" id="award-class-id" value="">
+                    <div class="form-group">
+                        <label class="form-label" for="award-reason">Reason for Points</label>
+                        <select class="form-control form-select" id="award-reason">
+                            <option value="Excellent Classwork">Excellent Classwork</option>
+                            <option value="Outstanding Participation">Outstanding Participation</option>
+                            <option value="Perfect Behavior">Perfect Behavior</option>
+                            <option value="Helping Others">Helping Others</option>
+                            <option value="Creative Thinking">Creative Thinking</option>
+                            <option value="Team Collaboration">Team Collaboration</option>
+                            <option value="Quiz Champion">Quiz Champion</option>
+                            <option value="Special Achievement">Special Achievement</option>
+                            <option value="custom">Custom Reason...</option>
+                        </select>
+                    </div>
+                    <div class="form-group" id="custom-reason-group" style="display: none;">
+                        <label class="form-label" for="custom-reason">Custom Reason</label>
+                        <input type="text" class="form-control" id="custom-reason" placeholder="Enter custom reason">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Points to Award</label>
+                        <div class="form-points">
+                            <input type="number" class="form-control" id="award-points" min="1" max="50" value="10">
+                            <span class="points-label">points</span>
+                        </div>
+                    </div>
+                </form>
+                <div class="modal-actions">
+                    <button class="modal-btn btn-cancel" onclick="hideAwardModal()">Cancel</button>
+                    <button class="modal-btn btn-confirm" style="background-color: #4CAF50;" onclick="awardSpecialPoints()">Award Points</button>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <button class="reset-btn" onclick="showResetModal()">
+                <i class="fas fa-redo-alt"></i> Reset Points
+            </button>
+            <div class="data-actions">
+                <button class="btn-export" onclick="exportData()">
+                    <i class="fas fa-download"></i> Export Data
+                </button>
+                <button class="btn-import" onclick="importData()">
+                    <i class="fas fa-upload"></i> Import Data
+                </button>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Maximum points to completely fill the hourglass (for scaling)
+        const MAX_POINTS = 200;
+        
+        // Initialize or get stored points with yr6 prefix to avoid conflicts with yr7
+        let scores = {
+            '6D': parseInt(localStorage.getItem('yr6-points-6D')) || 0,
+            '6J': parseInt(localStorage.getItem('yr6-points-6J')) || 0,
+            '6M': parseInt(localStorage.getItem('yr6-points-6M')) || 0
+        };
+        
+        // Get activity history or initialize empty array with yr6 prefix
+        let activities = JSON.parse(localStorage.getItem('yr6-activities')) || [];
+
+        // Initialize the UI
+        document.addEventListener('DOMContentLoaded', function() {
+            // Update scores display
+            for (const classId in scores) {
+                updateDisplay(classId);
+            }
+            // Update rankings
+            updateRankings();
+            
+            // Update activity feed
+            updateActivityFeed();
+            
+            // Setup award reason selection change event
+            document.getElementById('award-reason').addEventListener('change', function() {
+                const customReasonGroup = document.getElementById('custom-reason-group');
+                if (this.value === 'custom') {
+                    customReasonGroup.style.display = 'block';
+                } else {
+                    customReasonGroup.style.display = 'none';
+                }
+            });
+        });
+
+        // Update points for a class
+        function updatePoints(classId, action) {
+            const oldScore = scores[classId];
+            const inputEl = document.getElementById(`custom-points-${classId}`);
+            const amount = parseInt(inputEl.value) || 5;
+            
+            if (action === 'add') {
+                scores[classId] += amount;
+                
+                // Add activity
+                addActivity(classId, `Added ${amount} points to Class ${classId}`, amount);
+                
+            } else if (action === 'subtract') {
+                scores[classId] -= amount;
+                
+                // Don't allow negative scores
+                if (scores[classId] < 0) {
+                    scores[classId] = 0;
+                }
+                
+                // Add activity
+                addActivity(classId, `Deducted ${amount} points from Class ${classId}`, -amount);
+            }
+            
+            // Store updated score with yr6 prefix
+            localStorage.setItem(`yr6-points-${classId}`, scores[classId]);
+            
+            // Update the display
+            updateDisplay(classId);
+            
+            // Create sand animation if adding points
+            if (action === 'add') {
+                createSandAnimation(classId);
+            }
+            
+            // Update rankings
+            updateRankings();
+            
+            // Add pulse animation to score
+            const scoreElement = document.getElementById(`score-${classId}`);
+            scoreElement.classList.add('pulse');
+            setTimeout(() => {
+                scoreElement.classList.remove('pulse');
+            }, 500);
+        }
+
+        // Update the display for a specific class
+        function updateDisplay(classId) {
+            // Update score display
+            const scoreElement = document.getElementById(`score-${classId}`);
+            scoreElement.textContent = scores[classId];
+            
+            // Update hourglass fill
+            updateHourglassFill(classId);
+        }
+
+        // Update hourglass fill levels
+        function updateHourglassFill(classId) {
+            // Calculate percentage filled (capped at 100%)
+            const fillPercentage = Math.min(scores[classId] / MAX_POINTS, 1);
+            
+            // Inverse for top (starts full, empties as score increases)
+            const topHeightPercent = 110 * (1 - fillPercentage);
+            
+            // Bottom fills as score increases
+            const bottomHeightPercent = 110 * fillPercentage;
+            
+            // Update the hourglass elements
+            const topElement = document.getElementById(`top-${classId}`);
+            const bottomElement = document.getElementById(`bottom-${classId}`);
+            
+            // Apply the height changes
+            topElement.style.height = `${topHeightPercent}px`;
+            bottomElement.style.height = `${bottomHeightPercent}px`;
+        }
+
+        // Create sand falling animation
+        function createSandAnimation(classId) {
+            const hourglass = document.querySelector(`.hourglass-${classId}`);
+            const hourglassRect = hourglass.getBoundingClientRect();
+            
+            // Create sand particles
+            for (let i = 0; i < 5; i++) {
+                setTimeout(() => {
+                    const particle = document.createElement('div');
+                    particle.classList.add('sand-particle');
+                    
+                    // Set color based on class
+                    particle.style.backgroundColor = getComputedStyle(document.documentElement).getPropertyValue(`--sand-${classId}`);
+                    
+                    // Position at the middle neck of the hourglass
+                    particle.style.left = `${hourglassRect.width / 2 - 3 + (Math.random() * 6 - 3)}px`;
+                    particle.style.top = `${hourglassRect.height / 2 - 3}px`;
+                    
+                    hourglass.appendChild(particle);
+                    
+                    // Remove particle after animation completes
+                    setTimeout(() => {
+                        particle.remove();
+                    }, 1000);
+                }, i * 200);
+            }
+        }
+
+        // Play sound function
+        function playSound() {
+            // Create an audio element to play the local MP3 file
+            const audio = new Audio('snape.mp3');
+            audio.play()
+                .catch(err => {
+                    console.error('Error playing sound:', err);
+                    alert('Error playing sound: ' + err.message);
+                });
+            
+            // Add activity
+            addActivity(null, 'Professor Snape spoke to the class', 0);
+        }
+        
+        // Add activity to history
+        function addActivity(classId, description, points) {
+            const activity = {
+                classId: classId,
+                description: description,
+                points: points,
+                timestamp: new Date().toISOString()
+            };
+            
+            // Add to beginning of array
+            activities.unshift(activity);
+            
+            // Limit to 50 activities
+            if (activities.length > 50) {
+                activities.pop();
+            }
+            
+            // Save to localStorage with yr6 prefix
+            localStorage.setItem('yr6-activities', JSON.stringify(activities));
+            
+            // Update activity feed
+            updateActivityFeed();
+        }
+        
+        // Update activity feed display
+        function updateActivityFeed() {
+            const activityList = document.getElementById('activity-list');
+            activityList.innerHTML = '';
+            
+            if (activities.length === 0) {
+                const emptyItem = document.createElement('li');
+                emptyItem.classList.add('activity-item');
+                emptyItem.innerHTML = '<i class="fas fa-info-circle"></i> No recent activity to display';
+                activityList.appendChild(emptyItem);
+                return;
+            }
+            
+            // Show the 10 most recent activities
+            const recentActivities = activities.slice(0, 10);
+            
+            recentActivities.forEach(activity => {
+                const item = document.createElement('li');
+                item.classList.add('activity-item');
+                
+                // Get appropriate icon
+                let icon = 'fas fa-history';
+                if (activity.points > 0) {
+                    icon = 'fas fa-plus-circle';
+                } else if (activity.points < 0) {
+                    icon = 'fas fa-minus-circle';
+                }
+                
+                // Format time
+                const time = formatTimeAgo(new Date(activity.timestamp));
+                
+                // Create points display if applicable
+                let pointsDisplay = '';
+                if (activity.points !== 0) {
+                    const pointsClass = activity.points > 0 ? 'positive' : 'negative';
+                    pointsDisplay = `<span class="activity-points ${pointsClass}">${activity.points > 0 ? '+' : ''}${activity.points}</span>`;
+                }
+                
+                item.innerHTML = `
+                    <i class="${icon}"></i>
+                    ${activity.description}
+                    ${pointsDisplay}
+                    <span class="activity-time">${time}</span>
+                `;
+                
+                activityList.appendChild(item);
+            });
+            
+            // Helper function to format time ago
+            function formatTimeAgo(date) {
+                const now = new Date();
+                const seconds = Math.floor((now - date) / 1000);
+                
+                if (seconds < 60) return 'just now';
+                
+                const minutes = Math.floor(seconds / 60);
+                if (minutes < 60) return `${minutes}m ago`;
+                
+                const hours = Math.floor(minutes / 60);
+                if (hours < 24) return `${hours}h ago`;
+                
+                const days = Math.floor(hours / 24);
+                return `${days}d ago`;
+            }
+        }
+        
+        // Show award modal
+        function showAwardModal(classId) {
+            const modal = document.getElementById('awardModal');
+            document.getElementById('award-class-id').value = classId;
+            
+            // Reset form
+            document.getElementById('award-reason').value = 'Excellent Classwork';
+            document.getElementById('custom-reason-group').style.display = 'none';
+            document.getElementById('custom-reason').value = '';
+            document.getElementById('award-points').value = '10';
+            
+            // Show modal
+            modal.classList.add('show');
+        }
+        
+        // Hide award modal
+        function hideAwardModal() {
+            const modal = document.getElementById('awardModal');
+            modal.classList.remove('show');
+        }
+        
+        // Award special points
+        function awardSpecialPoints() {
+            const classId = document.getElementById('award-class-id').value;
+            const reasonSelect = document.getElementById('award-reason');
+            let reason = reasonSelect.value;
+            
+            // Check for custom reason
+            if (reason === 'custom') {
+                reason = document.getElementById('custom-reason').value || 'Special Achievement';
+            }
+            
+            const points = parseInt(document.getElementById('award-points').value) || 10;
+            
+            // Update points
+            scores[classId] += points;
+            
+            // Store updated score with yr6 prefix
+            localStorage.setItem(`yr6-points-${classId}`, scores[classId]);
+            
+            // Add activity
+            addActivity(classId, `Award: ${reason} for Class ${classId}`, points);
+            
+            // Update display
+            updateDisplay(classId);
+            
+            // Create sand animation
+            createSandAnimation(classId);
+            
+            // Update rankings
+            updateRankings();
+            
+            // Hide modal
+            hideAwardModal();
+        }
+        
+        // Update rankings
+        function updateRankings() {
+            // Sort classes by score
+            const sortedClasses = Object.entries(scores)
+                .sort((a, b) => b[1] - a[1])
+                .map(([classId, score], index) => ({ classId, score, rank: index + 1 }));
+            
+            // Handle ties by giving the same rank
+            for (let i = 1; i < sortedClasses.length; i++) {
+                if (sortedClasses[i].score === sortedClasses[i-1].score) {
+                    sortedClasses[i].rank = sortedClasses[i-1].rank;
+                }
+            }
+            
+            // Update rank badges on cards
+            for (const { classId, rank } of sortedClasses) {
+                const rankElement = document.getElementById(`rank-${classId}`);
+                rankElement.textContent = `#${rank}`;
+            }
+            
+            // Update rankings grid display
+            const rankingsContainer = document.getElementById('rankings-grid');
+            rankingsContainer.innerHTML = '';
+            
+            // Create ranking cards
+            sortedClasses.forEach(({ classId, score, rank }) => {
+                // Create ranking card
+                const rankCard = document.createElement('div');
+                rankCard.classList.add('ranking-card');
+                
+                // Add special class for first and second place
+                if (rank === 1) rankCard.classList.add('first-place');
+                if (rank === 2) rankCard.classList.add('second-place');
+                
+                // Add trophy for first place
+                let trophyHtml = rank === 1 ? '<div class="trophy-icon"><i class="fas fa-trophy"></i></div>' : '';
+                
+                // Remove background images from ranking cards
+                // rankCard.style.backgroundImage = `url(...)`;
+            
+                rankCard.innerHTML = `
+                    <div class="rank-position rank-${getRankClass(rank)}">${rank}</div>
+                    ${trophyHtml}
+                    <div class="rank-class-container">
+                        <div class="rank-class">Class ${classId}</div>
+                    </div>
+                    <div class="rank-score">${score} points</div>
+                `;
+                
+                rankingsContainer.appendChild(rankCard);
+            });
+            
+            // Helper function to get rank class
+            function getRankClass(rank) {
+                const rankClasses = ['first', 'second', 'third'];
+                return rankClasses[rank - 1] || 'third';
+            }
+        }
+        
+        // Show reset confirmation modal
+        function showResetModal() {
+            const modal = document.getElementById('resetModal');
+            modal.classList.add('show');
+        }
+        
+        // Hide reset confirmation modal
+        function hideResetModal() {
+            const modal = document.getElementById('resetModal');
+            modal.classList.remove('show');
+        }
+        
+        // Reset all points (after confirmation)
+        function confirmReset() {
+            for (const classId in scores) {
+                scores[classId] = 0;
+                localStorage.setItem(`yr6-points-${classId}`, 0);
+                updateDisplay(classId);
+            }
+            
+            // Add activity
+            addActivity(null, "All class points have been reset", 0);
+            
+            // Update rankings
+            updateRankings();
+            
+            hideResetModal();
+        }
+        
+        // Export data function
+        function exportData() {
+            const data = {
+                scores: scores,
+                activities: activities,
+                exportDate: new Date().toISOString()
+            };
+            
+            // Convert to JSON string
+            const jsonString = JSON.stringify(data, null, 2);
+            
+            // Create blob and download link
+            const blob = new Blob([jsonString], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            
+            // Create temporary download link
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `year6_class_points_export_${new Date().toISOString().split('T')[0]}.json`;
+            document.body.appendChild(a);
+            a.click();
+            
+            // Clean up
+            setTimeout(() => {
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            }, 100);
+            
+            // Add activity
+            addActivity(null, "Points data exported", 0);
+        }
+        
+        // Import data function
+        function importData() {
+            // Create file input element
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.json';
+            
+            input.onchange = (e) => {
+                const file = e.target.files[0];
+                if (!file) return;
+                
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    try {
+                        const data = JSON.parse(event.target.result);
+                        
+                        // Validate data structure
+                        if (!data.scores || !data.activities) {
+                            alert('Invalid data format. Import failed.');
+                            return;
+                        }
+                        
+                        // Apply imported data
+                        scores = data.scores;
+                        activities = data.activities;
+                        
+                        // Store in localStorage
+                        for (const classId in scores) {
+                            localStorage.setItem(`yr6-points-${classId}`, scores[classId]);
+                        }
+                        localStorage.setItem('yr6-activities', JSON.stringify(activities));
+                        
+                        // Update displays
+                        for (const classId in scores) {
+                            updateDisplay(classId);
+                        }
+                        
+                        // Update rankings and activity feed
+                        updateRankings();
+                        updateActivityFeed();
+                        
+                        // Add activity
+                        addActivity(null, "Points data imported successfully", 0);
+                        
+                        alert('Data imported successfully!');
+                        
+                    } catch (error) {
+                        console.error('Import error:', error);
+                        alert('Error importing data. Please check the file format.');
+                    }
+                };
+                
+                reader.readAsText(file);
+            };
+            
+            // Trigger file selection
+            input.click();
+        }
+    </script>
+</body>
+</html>
