@@ -246,6 +246,73 @@
             }
         }
 
+        /* Activity Feed */
+        .activity-feed {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 40px;
+            max-height: 200px;
+            overflow-y: auto;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .activity-title {
+            text-align: center;
+            color: white;
+            font-size: 24px;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .activity-list {
+            list-style: none;
+        }
+        
+        .activity-item {
+            padding: 8px 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+        
+        .activity-item i {
+            margin-right: 10px;
+            color: #ffc107;
+        }
+        
+        .activity-time {
+            margin-left: auto;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .activity-points {
+            margin-left: 10px;
+            font-weight: bold;
+        }
+        
+        .activity-points.positive {
+            color: #4CAF50;
+        }
+        
+        .activity-points.negative {
+            color: #F44336;
+        }
+
         /* Hourglass Grid - CHANGED TO 2 COLUMNS */
         .hourglass-grid {
             display: grid;
@@ -304,7 +371,7 @@
             color: white;
         }
         
-        .hourglass-container, .points-value, .points-label, .controls {
+        .hourglass-container, .points-value, .points-label, .controls, .custom-points {
             position: relative;
             z-index: 1;
         }
@@ -397,6 +464,16 @@
             color: white;
             margin-bottom: 5px;
         }
+        
+        .points-value.pulse {
+            animation: pointsPulse 0.5s ease-out;
+        }
+        
+        @keyframes pointsPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
 
         .points-7A { color: var(--class-7A); }
         .points-7B { color: var(--class-7B); }
@@ -407,6 +484,31 @@
             color: rgba(255, 255, 255, 0.7);
             font-size: 16px;
             margin-bottom: 20px;
+        }
+        
+        /* Custom Points Input */
+        .custom-points {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+        
+        .points-input {
+            width: 60px;
+            padding: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background-color: rgba(0, 0, 0, 0.3);
+            color: white;
+            border-radius: 4px;
+            text-align: center;
+            font-size: 16px;
+            margin: 0 5px;
+        }
+        
+        .points-input:focus {
+            outline: none;
+            border-color: #ffc107;
+            box-shadow: 0 0 5px rgba(255, 193, 7, 0.5);
         }
 
         .controls {
@@ -436,6 +538,12 @@
 
         .btn-plus {
             color: white;
+        }
+
+        .btn-award {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 2px solid #ffc107;
+            color: #ffc107;
         }
 
         .btn-7A { background-color: var(--class-7A); }
@@ -546,6 +654,35 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
         }
         
+        /* Data Export/Import */
+        .data-actions {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .btn-export, .btn-import {
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 8px 15px;
+            font-size: 14px;
+            font-weight: 500;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-export:hover, .btn-import:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            border-color: #ffc107;
+        }
+        
         /* Modal Styles */
         .modal-backdrop {
             position: fixed;
@@ -632,6 +769,64 @@
             transform: translateY(-2px);
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
         }
+        
+        /* Award Modal */
+        .award-modal .modal {
+            max-width: 500px;
+        }
+        
+        .award-form {
+            margin-bottom: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 5px;
+            color: white;
+            font-weight: 600;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background-color: rgba(0, 0, 0, 0.3);
+            color: white;
+            font-size: 16px;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: #ffc107;
+        }
+        
+        .form-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='white' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            padding-right: 30px;
+        }
+        
+        .form-points {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .form-points input {
+            width: 80px;
+        }
+        
+        .points-label {
+            color: white;
+        }
 
         /* For animations */
         @keyframes sandFall {
@@ -690,6 +885,14 @@
             </div>
         </div>
 
+        <!-- Activity Feed -->
+        <div class="activity-feed">
+            <div class="activity-title">Recent Activity</div>
+            <ul class="activity-list" id="activity-list">
+                <!-- Will be filled by JavaScript -->
+            </ul>
+        </div>
+
         <div class="hourglass-grid">
             <!-- Class 7A Hourglass -->
             <div class="hourglass-card" style="background-image: url('https://i.ytimg.com/vi/_efR484JBzQ/hqdefault.jpg');">
@@ -708,9 +911,15 @@
                 </div>
                 <div class="points-value points-7A" id="score-7A">0</div>
                 <div class="points-label">Total Points</div>
+                <div class="custom-points">
+                    <input type="number" class="points-input" id="custom-points-7A" min="1" max="50" value="5">
+                </div>
                 <div class="controls">
-                    <button class="btn btn-minus" onclick="updatePoints('7A', -5)">-5</button>
-                    <button class="btn btn-plus btn-7A" onclick="updatePoints('7A', 5)">+5</button>
+                    <button class="btn btn-minus" onclick="updatePoints('7A', 'subtract')">-</button>
+                    <button class="btn btn-plus btn-7A" onclick="updatePoints('7A', 'add')">+</button>
+                    <button class="btn btn-award" onclick="showAwardModal('7A')">
+                        <i class="fas fa-award"></i>
+                    </button>
                 </div>
             </div>
 
@@ -731,9 +940,15 @@
                 </div>
                 <div class="points-value points-7B" id="score-7B">0</div>
                 <div class="points-label">Total Points</div>
+                <div class="custom-points">
+                    <input type="number" class="points-input" id="custom-points-7B" min="1" max="50" value="5">
+                </div>
                 <div class="controls">
-                    <button class="btn btn-minus" onclick="updatePoints('7B', -5)">-5</button>
-                    <button class="btn btn-plus btn-7B" onclick="updatePoints('7B', 5)">+5</button>
+                    <button class="btn btn-minus" onclick="updatePoints('7B', 'subtract')">-</button>
+                    <button class="btn btn-plus btn-7B" onclick="updatePoints('7B', 'add')">+</button>
+                    <button class="btn btn-award" onclick="showAwardModal('7B')">
+                        <i class="fas fa-award"></i>
+                    </button>
                 </div>
             </div>
 
@@ -754,9 +969,15 @@
                 </div>
                 <div class="points-value points-7C" id="score-7C">0</div>
                 <div class="points-label">Total Points</div>
+                <div class="custom-points">
+                    <input type="number" class="points-input" id="custom-points-7C" min="1" max="50" value="5">
+                </div>
                 <div class="controls">
-                    <button class="btn btn-minus" onclick="updatePoints('7C', -5)">-5</button>
-                    <button class="btn btn-plus btn-7C" onclick="updatePoints('7C', 5)">+5</button>
+                    <button class="btn btn-minus" onclick="updatePoints('7C', 'subtract')">-</button>
+                    <button class="btn btn-plus btn-7C" onclick="updatePoints('7C', 'add')">+</button>
+                    <button class="btn btn-award" onclick="showAwardModal('7C')">
+                        <i class="fas fa-award"></i>
+                    </button>
                 </div>
             </div>
 
@@ -777,9 +998,15 @@
                 </div>
                 <div class="points-value points-7F" id="score-7F">0</div>
                 <div class="points-label">Total Points</div>
+                <div class="custom-points">
+                    <input type="number" class="points-input" id="custom-points-7F" min="1" max="50" value="5">
+                </div>
                 <div class="controls">
-                    <button class="btn btn-minus" onclick="updatePoints('7F', -5)">-5</button>
-                    <button class="btn btn-plus btn-7F" onclick="updatePoints('7F', 5)">+5</button>
+                    <button class="btn btn-minus" onclick="updatePoints('7F', 'subtract')">-</button>
+                    <button class="btn btn-plus btn-7F" onclick="updatePoints('7F', 'add')">+</button>
+                    <button class="btn btn-award" onclick="showAwardModal('7F')">
+                        <i class="fas fa-award"></i>
+                    </button>
                 </div>
             </div>
         </div>
@@ -805,11 +1032,61 @@
                 </div>
             </div>
         </div>
+        
+        <!-- Award Modal -->
+        <div class="modal-backdrop award-modal" id="awardModal">
+            <div class="modal">
+                <div class="modal-title">Award Special Points</div>
+                <div class="modal-content">
+                    Recognize outstanding achievements with special points.
+                </div>
+                <form class="award-form" id="award-form">
+                    <input type="hidden" id="award-class-id" value="">
+                    <div class="form-group">
+                        <label class="form-label" for="award-reason">Reason for Points</label>
+                        <select class="form-control form-select" id="award-reason">
+                            <option value="Excellent Classwork">Excellent Classwork</option>
+                            <option value="Outstanding Participation">Outstanding Participation</option>
+                            <option value="Perfect Behavior">Perfect Behavior</option>
+                            <option value="Helping Others">Helping Others</option>
+                            <option value="Creative Thinking">Creative Thinking</option>
+                            <option value="Team Collaboration">Team Collaboration</option>
+                            <option value="Quiz Champion">Quiz Champion</option>
+                            <option value="Special Achievement">Special Achievement</option>
+                            <option value="custom">Custom Reason...</option>
+                        </select>
+                    </div>
+                    <div class="form-group" id="custom-reason-group" style="display: none;">
+                        <label class="form-label" for="custom-reason">Custom Reason</label>
+                        <input type="text" class="form-control" id="custom-reason" placeholder="Enter custom reason">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Points to Award</label>
+                        <div class="form-points">
+                            <input type="number" class="form-control" id="award-points" min="1" max="50" value="10">
+                            <span class="points-label">points</span>
+                        </div>
+                    </div>
+                </form>
+                <div class="modal-actions">
+                    <button class="modal-btn btn-cancel" onclick="hideAwardModal()">Cancel</button>
+                    <button class="modal-btn btn-confirm" style="background-color: #4CAF50;" onclick="awardSpecialPoints()">Award Points</button>
+                </div>
+            </div>
+        </div>
 
         <footer>
             <button class="reset-btn" onclick="showResetModal()">
                 <i class="fas fa-redo-alt"></i> Reset Points
             </button>
+            <div class="data-actions">
+                <button class="btn-export" onclick="exportData()">
+                    <i class="fas fa-download"></i> Export Data
+                </button>
+                <button class="btn-import" onclick="importData()">
+                    <i class="fas fa-upload"></i> Import Data
+                </button>
+            </div>
         </footer>
     </div>
 
@@ -824,6 +1101,9 @@
             '7C': parseInt(localStorage.getItem('points-7C')) || 0,
             '7F': parseInt(localStorage.getItem('points-7F')) || 0
         };
+        
+        // Get activity history or initialize empty array
+        let activities = JSON.parse(localStorage.getItem('activities')) || [];
 
         // Initialize the UI
         document.addEventListener('DOMContentLoaded', function() {
@@ -833,16 +1113,43 @@
             }
             // Update rankings
             updateRankings();
+            
+            // Update activity feed
+            updateActivityFeed();
+            
+            // Setup award reason selection change event
+            document.getElementById('award-reason').addEventListener('change', function() {
+                const customReasonGroup = document.getElementById('custom-reason-group');
+                if (this.value === 'custom') {
+                    customReasonGroup.style.display = 'block';
+                } else {
+                    customReasonGroup.style.display = 'none';
+                }
+            });
         });
 
         // Update points for a class
-        function updatePoints(classId, amount) {
+        function updatePoints(classId, action) {
             const oldScore = scores[classId];
-            scores[classId] += amount;
+            const inputEl = document.getElementById(`custom-points-${classId}`);
+            const amount = parseInt(inputEl.value) || 5;
             
-            // Don't allow negative scores
-            if (scores[classId] < 0) {
-                scores[classId] = 0;
+            if (action === 'add') {
+                scores[classId] += amount;
+                
+                // Add activity
+                addActivity(classId, `Added ${amount} points to Class ${classId}`, amount);
+                
+            } else if (action === 'subtract') {
+                scores[classId] -= amount;
+                
+                // Don't allow negative scores
+                if (scores[classId] < 0) {
+                    scores[classId] = 0;
+                }
+                
+                // Add activity
+                addActivity(classId, `Deducted ${amount} points from Class ${classId}`, -amount);
             }
             
             // Store updated score
@@ -852,12 +1159,19 @@
             updateDisplay(classId);
             
             // Create sand animation if adding points
-            if (amount > 0) {
+            if (action === 'add') {
                 createSandAnimation(classId);
             }
             
             // Update rankings
             updateRankings();
+            
+            // Add pulse animation to score
+            const scoreElement = document.getElementById(`score-${classId}`);
+            scoreElement.classList.add('pulse');
+            setTimeout(() => {
+                scoreElement.classList.remove('pulse');
+            }, 500);
         }
 
         // Update the display for a specific class
@@ -876,10 +1190,10 @@
             const fillPercentage = Math.min(scores[classId] / MAX_POINTS, 1);
             
             // Inverse for top (starts full, empties as score increases)
-            const topHeightPercent = (1 - fillPercentage) * 100;
+            const topHeightPercent = 110 * (1 - fillPercentage);
             
             // Bottom fills as score increases
-            const bottomHeightPercent = fillPercentage * 100;
+            const bottomHeightPercent = 110 * fillPercentage;
             
             // Update the hourglass elements
             const topElement = document.getElementById(`top-${classId}`);
@@ -920,51 +1234,162 @@
 
         // Play sound function
         function playSound() {
-            // Create an audio element to play the sound
-            fetch('snape.html')
-                .then(response => {
-                    if (!response.ok) {
-                        console.error('Failed to load sound file');
-                        alert('Failed to load sound file');
-                    }
-                    return response.blob();
-                })
-                .then(blob => {
-                    const audioURL = URL.createObjectURL(blob);
-                    const audio = new Audio(audioURL);
-                    audio.play()
-                        .catch(err => {
-                            console.error('Error playing sound:', err);
-                            alert('Error playing sound: ' + err.message);
-                        });
-                })
+            // Create an audio element to play the local MP3 file
+            const audio = new Audio('snape.mp3');
+            audio.play()
                 .catch(err => {
-                    console.error('Error fetching sound file:', err);
-                    alert('Error fetching sound file: ' + err.message);
+                    console.error('Error playing sound:', err);
+                    alert('Error playing sound: ' + err.message);
                 });
+            
+            // Add activity
+            addActivity(null, 'Professor Snape spoke to the class', 0);
         }
         
-        // Show reset confirmation modal
-        function showResetModal() {
-            const modal = document.getElementById('resetModal');
+        // Add activity to history
+        function addActivity(classId, description, points) {
+            const activity = {
+                classId: classId,
+                description: description,
+                points: points,
+                timestamp: new Date().toISOString()
+            };
+            
+            // Add to beginning of array
+            activities.unshift(activity);
+            
+            // Limit to 50 activities
+            if (activities.length > 50) {
+                activities.pop();
+            }
+            
+            // Save to localStorage
+            localStorage.setItem('activities', JSON.stringify(activities));
+            
+            // Update activity feed
+            updateActivityFeed();
+        }
+        
+        // Update activity feed display
+        function updateActivityFeed() {
+            const activityList = document.getElementById('activity-list');
+            activityList.innerHTML = '';
+            
+            if (activities.length === 0) {
+                const emptyItem = document.createElement('li');
+                emptyItem.classList.add('activity-item');
+                emptyItem.innerHTML = '<i class="fas fa-info-circle"></i> No recent activity to display';
+                activityList.appendChild(emptyItem);
+                return;
+            }
+            
+            // Show the 10 most recent activities
+            const recentActivities = activities.slice(0, 10);
+            
+            recentActivities.forEach(activity => {
+                const item = document.createElement('li');
+                item.classList.add('activity-item');
+                
+                // Get appropriate icon
+                let icon = 'fas fa-history';
+                if (activity.points > 0) {
+                    icon = 'fas fa-plus-circle';
+                } else if (activity.points < 0) {
+                    icon = 'fas fa-minus-circle';
+                }
+                
+                // Format time
+                const time = formatTimeAgo(new Date(activity.timestamp));
+                
+                // Create points display if applicable
+                let pointsDisplay = '';
+                if (activity.points !== 0) {
+                    const pointsClass = activity.points > 0 ? 'positive' : 'negative';
+                    pointsDisplay = `<span class="activity-points ${pointsClass}">${activity.points > 0 ? '+' : ''}${activity.points}</span>`;
+                }
+                
+                item.innerHTML = `
+                    <i class="${icon}"></i>
+                    ${activity.description}
+                    ${pointsDisplay}
+                    <span class="activity-time">${time}</span>
+                `;
+                
+                activityList.appendChild(item);
+            });
+            
+            // Helper function to format time ago
+            function formatTimeAgo(date) {
+                const now = new Date();
+                const seconds = Math.floor((now - date) / 1000);
+                
+                if (seconds < 60) return 'just now';
+                
+                const minutes = Math.floor(seconds / 60);
+                if (minutes < 60) return `${minutes}m ago`;
+                
+                const hours = Math.floor(minutes / 60);
+                if (hours < 24) return `${hours}h ago`;
+                
+                const days = Math.floor(hours / 24);
+                return `${days}d ago`;
+            }
+        }
+        
+        // Show award modal
+        function showAwardModal(classId) {
+            const modal = document.getElementById('awardModal');
+            document.getElementById('award-class-id').value = classId;
+            
+            // Reset form
+            document.getElementById('award-reason').value = 'Excellent Classwork';
+            document.getElementById('custom-reason-group').style.display = 'none';
+            document.getElementById('custom-reason').value = '';
+            document.getElementById('award-points').value = '10';
+            
+            // Show modal
             modal.classList.add('show');
         }
         
-        // Hide reset confirmation modal
-        function hideResetModal() {
-            const modal = document.getElementById('resetModal');
+        // Hide award modal
+        function hideAwardModal() {
+            const modal = document.getElementById('awardModal');
             modal.classList.remove('show');
         }
         
-        // Reset all points (after confirmation)
-        function confirmReset() {
-            for (const classId in scores) {
-                scores[classId] = 0;
-                localStorage.setItem(`points-${classId}`, 0);
-                updateDisplay(classId);
+        // Award special points
+        function awardSpecialPoints() {
+            const classId = document.getElementById('award-class-id').value;
+            const reasonSelect = document.getElementById('award-reason');
+            let reason = reasonSelect.value;
+            
+            // Check for custom reason
+            if (reason === 'custom') {
+                reason = document.getElementById('custom-reason').value || 'Special Achievement';
             }
+            
+            const points = parseInt(document.getElementById('award-points').value) || 10;
+            
+            // Update points
+            scores[classId] += points;
+            
+            // Store updated score
+            localStorage.setItem(`points-${classId}`, scores[classId]);
+            
+            // Add activity
+            addActivity(classId, `Award: ${reason} for Class ${classId}`, points);
+            
+            // Update display
+            updateDisplay(classId);
+            
+            // Create sand animation
+            createSandAnimation(classId);
+            
+            // Update rankings
             updateRankings();
-            hideResetModal();
+            
+            // Hide modal
+            hideAwardModal();
         }
         
         // Update rankings
@@ -1006,7 +1431,7 @@
                 
                 rankCard.style.backgroundImage = `url('/api/placeholder/400/400')`;
             
-            rankCard.innerHTML = `
+                rankCard.innerHTML = `
                     <div class="rank-position rank-${getRankClass(rank)}">${rank}</div>
                     ${trophyHtml}
                     <div class="rank-class-container">
@@ -1023,6 +1448,126 @@
                 const rankClasses = ['first', 'second', 'third', 'fourth'];
                 return rankClasses[rank - 1] || 'fourth';
             }
+        }
+        
+        // Show reset confirmation modal
+        function showResetModal() {
+            const modal = document.getElementById('resetModal');
+            modal.classList.add('show');
+        }
+        
+        // Hide reset confirmation modal
+        function hideResetModal() {
+            const modal = document.getElementById('resetModal');
+            modal.classList.remove('show');
+        }
+        
+        // Reset all points (after confirmation)
+        function confirmReset() {
+            for (const classId in scores) {
+                scores[classId] = 0;
+                localStorage.setItem(`points-${classId}`, 0);
+                updateDisplay(classId);
+            }
+            
+            // Add activity
+            addActivity(null, "All class points have been reset", 0);
+            
+            // Update rankings
+            updateRankings();
+            
+            hideResetModal();
+        }
+        
+        // Export data function
+        function exportData() {
+            const data = {
+                scores: scores,
+                activities: activities,
+                exportDate: new Date().toISOString()
+            };
+            
+            // Convert to JSON string
+            const jsonString = JSON.stringify(data, null, 2);
+            
+            // Create blob and download link
+            const blob = new Blob([jsonString], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            
+            // Create temporary download link
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `class_points_export_${new Date().toISOString().split('T')[0]}.json`;
+            document.body.appendChild(a);
+            a.click();
+            
+            // Clean up
+            setTimeout(() => {
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            }, 100);
+            
+            // Add activity
+            addActivity(null, "Points data exported", 0);
+        }
+        
+        // Import data function
+        function importData() {
+            // Create file input element
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.json';
+            
+            input.onchange = (e) => {
+                const file = e.target.files[0];
+                if (!file) return;
+                
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    try {
+                        const data = JSON.parse(event.target.result);
+                        
+                        // Validate data structure
+                        if (!data.scores || !data.activities) {
+                            alert('Invalid data format. Import failed.');
+                            return;
+                        }
+                        
+                        // Apply imported data
+                        scores = data.scores;
+                        activities = data.activities;
+                        
+                        // Store in localStorage
+                        for (const classId in scores) {
+                            localStorage.setItem(`points-${classId}`, scores[classId]);
+                        }
+                        localStorage.setItem('activities', JSON.stringify(activities));
+                        
+                        // Update displays
+                        for (const classId in scores) {
+                            updateDisplay(classId);
+                        }
+                        
+                        // Update rankings and activity feed
+                        updateRankings();
+                        updateActivityFeed();
+                        
+                        // Add activity
+                        addActivity(null, "Points data imported successfully", 0);
+                        
+                        alert('Data imported successfully!');
+                        
+                    } catch (error) {
+                        console.error('Import error:', error);
+                        alert('Error importing data. Please check the file format.');
+                    }
+                };
+                
+                reader.readAsText(file);
+            };
+            
+            // Trigger file selection
+            input.click();
         }
     </script>
 </body>
