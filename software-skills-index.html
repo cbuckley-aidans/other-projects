@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOFTWARE SKILLS</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/inter-ui/3.19.3/inter.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 70px;
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+        :root {
+            --primary-bg: #ffffff;
+            --secondary-bg: #f7f7f7;
+            --accent-bg: #f0f0f0;
+            --accent-color: #FF5C00;
+            --active-color: #FF5C00;
+            --outline-color: #191919;
+            --text-color: #191919;
+            --shadow-sm: 0 0.15em 0 var(--outline-color);
+            --shadow-md: 0 0.25em 0 var(--outline-color);
+            --border-radius: 0.6em;
+            --transition-time: 0.15s;
+            --section-spacing: 80px;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--primary-bg);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            letter-spacing: -0.01em;
+            line-height: 1.5;
+            min-height: 100vh;
+            max-width: 100%;
+            overflow-x: hidden;
+            padding-top: 60px;
+        }
+
+        /* FIXED Navbar Styles */
+        #navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: var(--primary-bg);
+            z-index: 1000;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            border-bottom: 2px solid var(--outline-color);
+            height: 60px;
+        }
+
+        .navbar-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0 20px;
+            height: 100%;
+        }
+
+        .navbar-menu {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            gap: 40px;
+        }
+
+        .navbar-menu li a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color var(--transition-time);
+            padding: 8px 0;
+            position: relative;
+            font-size: 1.1rem;
+        }
+
+        .navbar-menu li a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background-color: var(--accent-color);
+            transition: width var(--transition-time);
+            border-radius: 1.5px;
+        }
+
+        .navbar-menu li a:hover {
+            color: var(--accent-color);
+        }
+
+        .navbar-menu li a:hover::after {
+            width: 100%;
+        }
+        
+        .navbar-menu li a.active {
+            color: var(--accent-color);
+        }
+        
+        .navbar-menu li a.active::after {
+            width: 100%;
+        }
+
+        /* Main content layout */
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Improved section spacing */
+        .section-container {
+            width: 100%;
+            margin-bottom: var(--section-spacing);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: var(--secondary-bg);
+            border-radius: var(--border-radius);
+            padding: 30px 20px;
+            border: 2px solid var(--outline-color);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 25px;
+            width: 100%;
+        }
+        
+        .section-title {
+            font-size: 2em;
+            margin: 0 0 5px 0;
+            display: inline-block;
+            padding-bottom: 5px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--accent-color);
+            border-radius: 1px;
+        }
+
+        /* Improved cards layout */
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            width: 100%;
+            max-width: 540px;
+            justify-content: center;
+            margin: 0 auto;
+        }
+        
+        /* Uploading Tips and Researching Tips sections (two-card layouts) */
+        #uploading-tips .cards-container,
+        #researching-tips .cards-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 0 auto;
+            max-width: none;
+        }
+        
+        /* For single cards that need centering */
+        .cards-container.single-card {
+            grid-template-columns: 1fr;
+            justify-items: center;
+            max-width: 180px;
+        }
+
+        /* Construction message */
+        .construction-message {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px 0;
+            padding: 20px;
+            background-color: var(--primary-bg);
+            border: 2px dashed var(--outline-color);
+            border-radius: var(--border-radius);
+            max-width: 400px;
+        }
+
+        .construction-icon {
+            font-size: 3rem;
+            color: var(--accent-color);
+            margin-bottom: 15px;
+        }
+
+        .construction-text {
+            font-weight: 600;
+            font-size: 1.2rem;
+            text-align: center;
+            margin: 0;
+        }
+
+        /* Card Design */
+        .card {
+            background-color: var(--primary-bg);
+            border: 2px solid var(--outline-color);
+            border-radius: var(--border-radius);
+            padding: 20px 15px;
+            transition: transform var(--transition-time), box-shadow var(--transition-time);
+            box-shadow: var(--shadow-sm);
+            transform: translateY(0);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: visible;
+            width: 160px;
+            height: 140px;
+            cursor: not-allowed;
+        }
+
+        .card:hover {
+            transform: translateY(-0.25em);
+            box-shadow: var(--shadow-md);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background-color: var(--accent-color);
+        }
+
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            background-color: var(--accent-color);
+            border: 2px solid var(--outline-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+            transition: transform var(--transition-time), box-shadow var(--transition-time);
+            box-shadow: var(--shadow-sm);
+            transform: translateY(0);
+        }
+
+        .card:hover .card-icon {
+            transform: translateY(-0.25em);
+            box-shadow: var(--shadow-md);
+        }
+
+        .card-icon i {
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .card-title {
+            font-size: 1rem;
+            font-weight: 700;
+            text-align: center;
+            margin: 0;
+            line-height: 1.3;
+        }
+
+        /* Card tooltip */
+        .card-tooltip {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--outline-color);
+            color: white;
+            padding: 6px 12px;
+            border-radius: var(--border-radius);
+            font-size: 0.85rem;
+            font-weight: 600;
+            opacity: 0;
+            transition: opacity var(--transition-time), transform var(--transition-time);
+            pointer-events: none;
+            white-space: nowrap;
+            margin-top: 10px;
+            z-index: 901;
+            width: max-content;
+        }
+
+        .card:hover .card-tooltip {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Card color variations */
+        /* Productivity */
+        .card-multitasking::before { background-color: #3498DB; }
+        .card-multitasking .card-icon { background-color: #3498DB; }
+        .card-youtube::before { background-color: #E74C3C; }
+        .card-youtube .card-icon { background-color: #E74C3C; }
+        .card-shortcuts::before { background-color: #2ECC71; }
+        .card-shortcuts .card-icon { background-color: #2ECC71; }
+        
+        /* Uploading Tips */
+        .card-links::before { background-color: #9B59B6; }
+        .card-links .card-icon { background-color: #9B59B6; }
+        .card-files::before { background-color: #F39C12; }
+        .card-files .card-icon { background-color: #F39C12; }
+
+        /* Researching Tips */
+        .card-google::before { background-color: #1ABC9C; }
+        .card-google .card-icon { background-color: #1ABC9C; }
+        .card-ai-tools::before { background-color: #D35400; }
+        .card-ai-tools .card-icon { background-color: #D35400; }
+
+        .floating-card {
+            position: fixed;
+            top: 80px;
+            left: 20px;
+            z-index: 900;
+            background-color: var(--primary-bg);
+            border: 2px solid var(--outline-color);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-sm);
+            padding: 12px;
+            transition: transform var(--transition-time), box-shadow var(--transition-time);
+            cursor: pointer;
+            overflow: visible;
+            width: 105px;
+        }
+
+        .floating-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background-color: #FF9500;
+        }
+
+        .floating-card:hover {
+            transform: translateY(-0.25em);
+            box-shadow: var(--shadow-md);
+        }
+
+        .floating-card-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 8px;
+        }
+
+        .floating-card-icon {
+            width: 36px;
+            height: 36px;
+            background-color: #FF9500;
+            border: 2px solid var(--outline-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .floating-card-icon i {
+            font-size: 1rem;
+            color: white;
+        }
+
+        .floating-card-title {
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin: 0;
+            line-height: 1.2;
+        }
+
+        .floating-card-tooltip {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--outline-color);
+            color: white;
+            padding: 6px 12px;
+            border-radius: var(--border-radius);
+            font-size: 0.85rem;
+            font-weight: 600;
+            opacity: 0;
+            transition: opacity var(--transition-time), transform var(--transition-time);
+            pointer-events: none;
+            white-space: nowrap;
+            margin-top: 10px;
+            z-index: 901;
+        }
+
+        .floating-card:hover .floating-card-tooltip {
+            opacity: 1;
+        }
+
+        /* Responsiveness */
+        @media (max-width: 768px) {
+            .navbar-container {
+                padding: 15px;
+            }
+
+            .navbar-menu {
+                gap: 20px;
+            }
+
+            .cards-container {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+                max-width: 350px;
+            }
+            
+            .card {
+                width: 140px;
+                height: 125px;
+                padding: 15px 10px;
+            }
+            
+            .card-icon {
+                width: 50px;
+                height: 50px;
+                margin-bottom: 8px;
+            }
+            
+            .card-title {
+                font-size: 0.9rem;
+            }
+            
+            .section-container {
+                padding: 25px 15px;
+            }
+
+            .construction-message {
+                padding: 15px;
+                max-width: 300px;
+            }
+
+            .construction-icon {
+                font-size: 2.5rem;
+                margin-bottom: 10px;
+            }
+
+            .construction-text {
+                font-size: 1.1rem;
+            }
+
+            .floating-card {
+                padding: 10px;
+                width: 90px;
+            }
+            
+            .floating-card-icon {
+                width: 30px;
+                height: 30px;
+            }
+            
+            .floating-card-title {
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-container {
+                padding: 40px 15px;
+            }
+
+            .cards-container {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+                max-width: 260px;
+            }
+
+            .card {
+                width: 120px;
+                height: 110px;
+                padding: 12px 8px;
+            }
+            
+            .card-icon {
+                width: 45px;
+                height: 45px;
+                margin-bottom: 8px;
+            }
+            
+            .card-icon i {
+                font-size: 1.25rem;
+            }
+
+            .card-title {
+                font-size: 0.8rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .navbar-menu {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .navbar-menu li a {
+                font-size: 0.95rem;
+            }
+            
+            .section-container {
+                padding: 20px 15px;
+            }
+
+            .construction-message {
+                padding: 12px;
+                max-width: 250px;
+            }
+
+            .construction-icon {
+                font-size: 2rem;
+                margin-bottom: 8px;
+            }
+
+            .construction-text {
+                font-size: 1rem;
+            }
+
+            .floating-card {
+                top: 70px;
+                left: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Fixed Navigation Bar -->
+    <nav id="navbar">
+        <div class="navbar-container">
+            <ul class="navbar-menu">
+                <li><a href="#productivity">Productivity</a></li>
+                <li><a href="#uploading-tips">Uploading Tips</a></li>
+                <li><a href="#researching-tips">Researching Tips</a></li>
+            </ul>
+        </div>
+    </nav>
+
+
+
+    <div class="main-container">
+        <!-- Productivity Section -->
+        <div id="productivity" class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">Productivity</h2>
+            </div>
+            <div class="cards-container">
+                <div class="card card-multitasking">
+                    <div class="card-icon">
+                        <i class="fa-solid fa-clone"></i>
+                    </div>
+                    <h2 class="card-title">Multitasking</h2>
+                    <span class="card-tooltip">Under Construction!</span>
+                </div>
+                
+                <div class="card card-youtube">
+                    <div class="card-icon">
+                        <i class="fa-brands fa-youtube"></i>
+                    </div>
+                    <h2 class="card-title">YouTube Transcripts</h2>
+                    <span class="card-tooltip">Under Construction!</span>
+                </div>
+                
+                <div class="card card-shortcuts">
+                    <div class="card-icon">
+                        <i class="fa-solid fa-keyboard"></i>
+                    </div>
+                    <h2 class="card-title">Keyboard Shortcuts</h2>
+                    <span class="card-tooltip">Under Construction!</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Uploading Tips Section -->
+        <div id="uploading-tips" class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">Uploading Tips</h2>
+            </div>
+            <div class="cards-container two-cards">
+                <div class="card card-links">
+                    <div class="card-icon">
+                        <i class="fa-solid fa-link"></i>
+                    </div>
+                    <h2 class="card-title">Links</h2>
+                    <span class="card-tooltip">Under Construction!</span>
+                </div>
+                
+                <div class="card card-files">
+                    <div class="card-icon">
+                        <i class="fa-solid fa-file-arrow-up"></i>
+                    </div>
+                    <h2 class="card-title">Attaching Files</h2>
+                    <span class="card-tooltip">Under Construction!</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Researching Tips Section -->
+        <div id="researching-tips" class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">Researching Tips</h2>
+            </div>
+            <div class="cards-container">
+                <div class="card card-google">
+                    <div class="card-icon">
+                        <i class="fa-brands fa-google"></i>
+                    </div>
+                    <h2 class="card-title">Googling Skills</h2>
+                    <span class="card-tooltip">Under Construction!</span>
+                </div>
+                
+                <div class="card card-ai-tools">
+                    <div class="card-icon">
+                        <i class="fa-solid fa-robot"></i>
+                    </div>
+                    <h2 class="card-title">AI Search Tools</h2>
+                    <span class="card-tooltip">Under Construction!</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Script for highlighting the active section
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('.section-container');
+            const navLinks = document.querySelectorAll('.navbar-menu li a');
+            
+            function highlightActiveSection() {
+                let scrollPosition = window.scrollY + 120; // Increased offset for fixed navbar
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.offsetHeight;
+                    const sectionId = section.getAttribute('id');
+                    
+                    if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                        navLinks.forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href') === '#' + sectionId) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            }
+            
+            window.addEventListener('scroll', highlightActiveSection);
+            highlightActiveSection(); // Call once on page load
+        });
+    </script>
+</body>
+</html>
