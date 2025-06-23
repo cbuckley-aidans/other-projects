@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Networks and Hardware Vocabulary</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/inter-ui/3.19.3/inter.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Prism CSS for code syntax highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/themes/prism-okaidia.min.css">
+    <!-- Favicon Icons -->
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <style>
+        /* Color Variables */
+        :root {
+            --primary-bg: #ffffff;
+            --secondary-bg: #f7f7f7;
+            --accent-bg: #f0f0f0;
+            --accent-color: #002654;
+            --outline-color: #191919;
+            --text-color: #191919;
+            --good-color: #4caf50;
+            --bad-color: #ff4d4f;
+            --border-radius: 0.6em;
+            --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.12);
+            --transition-time: 0.15s;
+        }
+        
+        /* Base Styles */
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            letter-spacing: -0.01em;
+            line-height: 1.5;
+            margin: 0;
+            padding: 0;
+            background-color: var(--primary-bg);
+            color: var(--text-color);
+        }
+        
+        h1, h2, h3, h4 {
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+        }
+        
+        /* Additional styles for the Networks and Hardware Vocabulary */
+        .search-container {
+            margin: 0 auto 40px auto;
+            max-width: 1200px;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 15px 20px;
+            font-size: 1.1em;
+            border: 2px solid var(--outline-color);
+            border-radius: var(--border-radius);
+            background-color: var(--primary-bg);
+            color: var(--text-color);
+            box-shadow: var(--shadow-sm);
+            transition: transform var(--transition-time), box-shadow var(--transition-time);
+        }
+        
+        .search-input:focus {
+            outline: none;
+            transform: translateY(-0.15em);
+            box-shadow: var(--shadow-md);
+            border-color: var(--accent-color);
+        }
+        
+        .skill-card {
+            background-color: var(--primary-bg);
+            border: 2px solid var(--outline-color);
+            border-radius: var(--border-radius);
+            margin-bottom: 30px;
+            box-shadow: var(--shadow-sm);
+            transition: transform var(--transition-time), box-shadow var(--transition-time);
+            overflow: hidden;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .skill-card:hover {
+            transform: translateY(-0.15em);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .skill-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 30px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            border-bottom: 2px solid var(--outline-color);
+            background-color: var(--secondary-bg);
+        }
+        
+        .skill-header:hover {
+            background-color: rgba(0, 38, 84, 0.1);
+        }
+        
+        .skill-icon-container {
+            display: flex;
+            align-items: center;
+        }
+        
+        .skill-icon {
+            width: 45px;
+            height: 45px;
+            background-color: var(--accent-color);
+            color: white;
+            border: 2px solid var(--outline-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .skill-title {
+            font-size: 1.4em;
+            font-weight: 700;
+            margin: 0;
+        }
+        
+        .toggle-arrow {
+            transition: transform 0.3s ease;
+            font-size: 1.2em;
+            color: var(--accent-color);
+        }
+        
+        .rotate-arrow {
+            transform: rotate(180deg);
+        }
+        
+        .skill-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+            padding: 0 30px;
+        }
+        
+        .skill-content.active {
+            max-height: 5000px;
+            padding: 30px;
+        }
+        
+        .subsection-block {
+            background-color: var(--primary-bg);
+            border: 2px solid var(--outline-color);
+            border-radius: var(--border-radius);
+            padding: 25px 30px;
+            margin-bottom: 30px;
+            transition: transform var(--transition-time), box-shadow var(--transition-time);
+            box-shadow: var(--shadow-sm);
+            position: relative;
+        }
+        
+        .subsection-block:hover {
+            transform: translateY(-0.15em);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .subsection-heading {
+            font-size: 1.3em;
+            font-weight: 600;
+            margin-top: 0;
+            margin-bottom: 20px;
+            color: var(--accent-color);
+        }
+        
+        .examples-container {
+            background-color: var(--secondary-bg);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin-top: 15px;
+        }
+        
+        .example-title {
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: var(--accent-color);
+        }
+        
+        .skill-card.hidden {
+            display: none;
+        }
+        
+        .results-info {
+            text-align: center;
+            padding: 15px;
+            margin-bottom: 20px;
+            background-color: var(--secondary-bg);
+            border-radius: var(--border-radius);
+            display: none;
+        }
+
+        .light-section {
+            padding: 40px 20px 20px 20px;
+            margin: 0 auto;
+            max-width: 1200px;
+        }
+
+        .search-container {
+            margin: 0 auto 40px auto;
+            max-width: 1100px;
+            padding: 0 20px;
+        }
+
+        .skill-card {
+            background-color: var(--primary-bg);
+            border: 2px solid var(--outline-color);
+            border-radius: var(--border-radius);
+            margin-bottom: 30px;
+            box-shadow: var(--shadow-sm);
+            transition: transform var(--transition-time), box-shadow var(--transition-time);
+            overflow: hidden;
+            max-width: 1100px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #skills-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .results-info {
+            text-align: center;
+            padding: 15px;
+            margin-bottom: 20px;
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 1100px;
+            background-color: var(--secondary-bg);
+            border-radius: var(--border-radius);
+            display: none;
+        }
+        
+        .related-terms {
+            margin-top: 20px;
+            background-color: rgba(0, 38, 84, 0.05);
+            padding: 15px;
+            border-radius: var(--border-radius);
+        }
+        
+        .related-terms-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .related-term {
+            display: inline-block;
+            margin-right: 10px;
+            margin-bottom: 8px;
+            background-color: var(--secondary-bg);
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.9em;
+        }
+
+        /* Ensure responsiveness */
+        @media (max-width: 1240px) {
+            .light-section,
+            #skills-container {
+                padding-left: 30px;
+                padding-right: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .light-section,
+            #skills-container {
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="light-section" style="padding-top: 40px;">
+        <h1 style="text-align: center; margin-bottom: 30px;">NETWORKS AND HARDWARE VOCABULARY</h1>
+        
+        <div class="search-container">
+            <input type="search" id="search-input" class="search-input" placeholder="Search for network and hardware terms (e.g., router, CPU, data packets)...">
+        </div>
+        
+        <div id="results-info" class="results-info">
+            <span id="results-count">0</span> results found for "<span id="search-term"></span>"
+        </div>
+        
+        <div id="skills-container">
+            <!-- Digital Network Section -->
+            <div class="skill-card" data-keywords="digital network connection sharing devices internet local area network LAN communication">
+                <div class="skill-header">
+                    <div class="skill-icon-container">
+                        <div class="skill-icon">
+                            <i class="fas fa-network-wired"></i>
+                        </div>
+                        <h3 class="skill-title">Digital Network</h3>
+                    </div>
+                    <i class="fas fa-chevron-down toggle-arrow"></i>
+                </div>
+                <div class="skill-content">
+                    <div class="subsection-block">
+                        <h4 class="subsection-heading">Simple Definition</h4>
+                        <p>When digital devices are connected together so they can share information and resources.</p>
+                    </div>
+
+                    <div class="subsection-block">
+                        <h4 class="subsection-heading">Detailed Definition</h4>
+                        <p>A digital network is a system where computers, tablets, phones, and other digital devices are linked together. This allows them to communicate with each other and share things like files, internet access, and printers.</p>
+                    </div>
+
+                    <div class="subsection-block">
+                        <h4 class="subsection-heading">Types of Networks</h4>
+                        <ul>
+                            <li><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 12px;"></i> <strong>Home Network:</strong> WiFi connects phones, laptops, tablets, and smart TVs</li>
+                            <li><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 12px;"></i> <strong>School Network:</strong> All computers, tablets, and printers in your school</li>
+                            <li><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 12px;"></i> <strong>The Internet:</strong> The world's biggest network connecting billions of devices</li>
+                        </ul>
+                    </div>
+
+                    <div class="subsection-block">
+                        <h4 class="subsection-heading">What Networks Allow</h4>
+                        <ul>
+                            <li><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 12px;"></i> Share files between devices</li>
+                            <li><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 12px;"></i> Use shared printers and resources</li>
+                            <li><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 12px;"></i> Access the internet from multiple devices</li>
+                            <li><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 12px;"></i> Play games together online</li>
+                        </ul>
+                    </div>
+
+                    <div class="examples-container">
+                        <p class="example-title">Example in Use:</p>
+                        <p>"Our school's <strong>digital network</strong> allows all students to access the same files and print to any printer in the building."</p>
+                    </div>
+
+                    <div class="related-terms">
+                        <p class="related-terms-title">Related Terms:</p>
+                        <span class="related-term">Router</span>
+                        <span class="related-term">Switch</span>
+                        <span class="related-term">WiFi</span>
+                        <span class="related-term">LAN</span>
+                        <span class="related-term">Internet</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Router Section -->
+            <div class="skill-card" data-keywords="router network traffic controller data packets gateway internet wifi wireless connection">
+                <div class="skill-header">
+                    <div class="skill-icon-container">
+                        <div class="skill-icon">
+                            <i class="fas fa-route"></i>
+                        </div>
+                        <h3 class="skill-title">Router</h3>
+                    </div>
+                    <i class="fas fa-chevron-down toggle-arrow"></i>
+                </div>
+                <div class="skill-content">
+                    <div class="subsection-block">
+                        <h4 class="subsection-heading">Simple Definition</h4>
+                        <p>A device that acts like a traffic controller for data, deciding where information should go in a network.</p>
+                    </div>
+
+                    <div class="subsection-block">
+                        <h4 class="subsection-heading">Detailed Definition</h4>
+                        <p>A router is a network device that forwards data packets between different networks. It reads the destination addresses on data packets and determines the best path for them to reach their target device.</p>
+                    </div>
+
+                    <div class="subsection-block">
+                        <h4 class="subsection-heading">What Routers Do</h4>
+                        <ul>
+                            <li><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 12px;"></i> <strong>Direct data:</strong> Send information to the right device</li>
+                            <li><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 12px;"></i> <strong>Protect network:</strong> Keep unwanted visitors out with security features</li>
+                            <li><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 12px;"></i> <strong>Create WiFi:</strong> Let devices connect wirelessly</li>
+                            <li><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 12px;"></i> <strong>Internet gateway:</strong> Connect your network to the internet</li>
+                        </ul>
+                    </div>
+
+                    <div class="subsection-block">
+                        <h4 class="subsection-heading">Think of it Like</h4>
+                        <p>A router is like a post office worker who reads addresses on mail and sorts it to the right destinations. It makes sure data gets to the correct device on the network.</p>
+                    </div>
+
+                    <div class="examples-container">
+                        <p class="example-title">Example in Use:</p>
+                        <p>"The school's main <strong>router</strong> manages all internet traffic and ensures each classroom gets the data it needs."</p>
+                    </div>
+
+                    <div class="related-terms">
+                        <p class="related-terms-title">Related Terms:</p>
+                        <span class="related-term">Data packets</span>
+                        <span class="related-term">Network gateway</span>
+                        <span class="related-term">WiFi access point</span>
+                        <span class="related-term">Network switch</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Network Switch Section -->
+            <div class="skill-card" data-keywords="switch network hub connections ethernet ports data smart delivery wired">
+                <div class="skill-header">
+                    <div class="skill-icon-container">
+                        <div class="skill-icon">
+                            <i class="fas fa-project-diagram"></i>
+                        </div>
+                        <h3 class="skill-title">Network Switch</h3>
+                    </div>
+                    <i class="fas fa-chevron-down toggle-arrow"></i>
+                </div>
+                <div class="skill-content">
+                    <div class="subsection-block">
+                        <h4 class="subsection-heading">Simple Definition</h4>
+                        <p>A device that connects multiple devices together in a network and smartly sends data only to the device that needs it.</p>
+                    </div>
+
+                    <div class="subsection-block">
+                        <h4 class="subsection-heading">Detailed Definition</h4>
+                        <p>A network switch is a device that connects multiple devices on a computer network using ethernet cables. Unlike a simple hub, a switch intelligently forwards data only to the intended recipient device.</p>
+                    </div>
+
+                    <div class="subsection-block">
+                        <h4 class="subsection-heading">What Switches Do</h4>
+                        <ul>
+                            <li><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 12px;"></i> <strong>More connections:</strong> Add extra ports so more devices can connect with cables</li>
+                            <li><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 12px;"></i> <strong>Smart delivery:</strong> Send data only to the device that needs it, not everyone</li>
+                            <li><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 12px;"></i> <strong>Fast connection:</strong> Wired connections through switches are usually faster than WiFi</li>
+                            <li><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 12px;"></i> <strong>Network expansion:</strong> Allow networks to grow and connect more devices</li>
+                        </ul>
+                    </div>
+
+                    <div class="subsection-block">
+                        <h4 class="subsection-heading">Think of it Like</h4>
+                        <p>A switch is like a power board that gives you more plugs, but for network cables! It's smarter than a simple hub because it remembers which device is connected to which port.</p>
+                    </div>
+
+                    <div class="examples-container">
+                        <p class="example-title">Example in Use:</p>
+                        <p>"Each classroom has a <strong>network switch</strong> that connects all the desktop computers to the school's main network."</p>
+                    </div>
+
+                    <div class="related-terms">
+                        <p class="related-terms-title">Related Terms:</p>
+                        <span class="related-term">Ethernet port</span>
+                        <span class="related-term">Network hub</span>
+                        <span class="related-term">Wired connection</span>
+                        <span class="related-term">Network expansion</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Data Packets Section -->
+            <div class="skill-card" data-keywords="data packets information transmission journey network post office breaking up reassemble">
+                <div class="skill-header">
+                    <div class="skill-icon-container">
+                        <div class="skill-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <h3 class="skill-title">Data Packets</h3>
+                    </div>
+                    <i class="fas fa-chevron-down toggle-arrow"></i>
+                </div>
+                <div class="skill-content">
+                    <div class="subsection-block">
+                        <h4 class="subsection-heading">Simple Definition</h4>
+                        <p>Small pieces of information that files are broken into when they travel through a network, then put back together at the destination.</p>
+                    </div>
+
+                    <div class="subsection-block">
+                        <h4 class="subsection-heading">Detailed Definition</h4>
+                        <p>When you send a file through a network, it gets chopped up into tiny pieces called data packets. Each packet contains a small part of your file plus addressing information showing where it needs to go.</p>
+                    </div>
+
+                    <div class="subsection-block">
+                        <h4 class="subsection-heading">How Data Packets Work</h4>
+                        <ol>
+                            <li><strong>Break it up:</strong> Your file gets split into lots of small packets</li>
+                            <li><strong>Send separately:</strong> Each packet travels independently through the network</li>
+                            <li><strong>Take different routes:</strong> Packets can use different paths to reach the destination</li>
+                            <li><strong>Put back together:</strong> The receiving device reassembles all packets into your original file</li>
+                        </ol>
+                    </div>
+
+                    <div class="subsection-block">
+                        <h4 class="subsection-heading">Why Use Packets?</h4>
+                        <ul>
+                            <li><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 12px;"></i> <strong>Multiple paths:</strong> If one route is busy, packets can go another way</li>
+                            <li><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 12px;"></i> <strong>Error recovery:</strong> If one packet gets lost, only that piece needs to be sent again</li>
+                            <li><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 12px;"></i> <strong>Speed:</strong> Multiple packets can travel at the same time</li>
+                            <li><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 12px;"></i> <strong>Sharing:</strong> The network can handle many files from different users at once</li>
+                        </ul>
+                    </div>
+
+                    <div class="subsection-block">
+                        <h4 class="subsection-heading">Think of it Like</h4>
+                        <p>Sending data packets is like sending a jigsaw puzzle through the post. You put each piece in a separate envelope, mail them all, and the recipient puts the puzzle back together when all pieces arrive.</p>
+                    </div>
+
+                    <div class="examples-container">
+                        <p class="example-title">Example in Use:</p>
+                        <p>"When you email a photo, it gets broken into hundreds of <strong>data packets</strong> that travel through the network and are reassembled at the recipient's computer."</p>
+                    </div>
+
+                    <div class="related-terms">
+                        <p class="related-terms-title">Related Terms:</p>
+                        <span class="related-term">Network transmission</span>
+                        <span class="related-term">File transfer</span>
+                        <span class="related-term">Packet switching</span>
+                        <span class="related-term">Network protocol</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Digital System Section -->
+            <div class="skill-card" data-keywords="digital system components hardware software input process store output computer">
+                <div class="skill-header">
+                    <div class="skill-icon-container">
+                        <div class="skill-icon">
+                            <i class="fas fa-cogs"></i>
+                        </div>
+                        <h3 class="skill-title">Digital System</h3>
+                    </div>
+                    <i class="fas fa-chevron-down toggle-arrow"></i>
+                </div>
+                <div class="skill-content">
+                    <div class="subsection-block">
+                        <h4 class="subsection-heading">Simple Definition</h4>
+                        <p>A combination of hardware and software components working together to process information.</p>
+                    </div>
+
+                    <div class="subsection-block">
+                        <h4 class="subsection-heading">Detailed Definition</h4>
+                        <p>A digital system is made up of physical parts (hardware) and programs (software) that work together to receive, process, store, and output information. Every digital system follows the same basic pattern.</p>
+                    </div>
+
+                    <div class="subsection-block">
+                        <h4 class="subsection-heading">Components of a Digital System</h4>
+                        <ul>
+                            <li><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 12px;"></i> <strong>Hardware:</strong> Physical parts you can touch (keyboard, mouse, screen, processor)</li>
+                            <li><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 12px;"></i> <strong>Software:</strong> Programs and apps that run on the hardware</li>
+                        </ul>
+                    </div>
+
+                    <div class="subsection-block">
+                        <h4 class="subsection-heading">The Universal Pattern</h4>
+                        <p>Every digital system follows these four steps:</p>
+                        <ol>
+                            <li><strong>INPUT:</strong> Data enters the system</li>
+                            <li><strong>PROCESS:</strong> The system works on the data</li>
+                            <li><strong>STORE:</strong> Results are saved in memory</li>
+                            <li><strong>OUTPUT:</strong> Results are shown to the user</li>
+                        </ol>
+                    </div>
+
+                    <div class="subsection-block">
+                        <h4 class="subsection-heading">Examples of Digital Systems</h4>
+                        <ul>
+                            <li><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 12px;"></i> Desktop computers and laptops</li>
+                            <li><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 12px;"></i> Smartphones and tablets</li>
+                            <li><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 12px;"></i> Gaming consoles</li>
+                            <li><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 12px;"></i> Smart TVs and smart watches</li>
+                        </ul>
+                    </div>
+
+                    <div class="examples-container">
+                        <p class="example-title">Example in Use:</p>
+                        <p>"A smartphone is a <strong>digital system</strong> because it combines hardware components with software apps to process information."</p>
+                    </div>
+
+                    <div class="related-terms">
+                        <p class="related-terms-title">Related Terms:</p>
+                        <span class="related-term">Hardware</span>
+                        <span class="related-term">Software</span>
+                        <span class="related-term">Input device</span>
+                        <span class="related-term">Output device</span>
+                        <span class="related-term">Processing</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CPU Section -->
+            <div class="skill-card" data-keywords="cpu central processing unit processor brain calculations decisions instructions">
+                <div class="skill-header">
+                    <div class="skill-icon-container">
+                        <div class="skill-icon">
+                            <i class="fas fa-microchip"></i>
+                        </div>
+                        <h3 class="skill-title">CPU (Central Processing Unit)</h3>
+                    </div>
+                    <i class="fas fa-chevron-down toggle-arrow"></i>
+                </div>
+                <div class="skill-content">
+                    <div class="subsection-block">
+                        <h4 class="subsection-heading">Simple Definition</h4>
+                        <p>The "brain" of a computer that makes all the decisions and performs calculations.</p>
+                    </div>
+
+                    <div class="subsection-block">
+                        <h4 class="subsection-heading">Detailed Definition</h4>
+                        <p>The CPU is the main processing component of a computer. It executes instructions from programs, performs mathematical calculations, and coordinates the work of all other components in the system.</p>
+                    </div>
+
+                    <div class="subsection-block">
+                        <h4 class="subsection-heading">What the CPU Does</h4>
+                        <ul>
+                            <li><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 12px;"></i> <strong>Execute instructions:</strong> Follows the steps in computer programs</li>
+                            <li><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 12px;"></i> <strong>Perform calculations:</strong> Does maths and logical operations</li>
+                            <li><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 12px;"></i> <strong>Control other components:</strong> Tells other parts of the computer what to do</li>
+                            <li><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 12px;"></i> <strong>Manage data flow:</strong> Moves information between different parts of the system</li>
+                        </ul>
+                    </div>
+
+                    <div class="subsection-block">
+                        <h4 class="subsection-heading">Think of it Like</h4>
+                        <p>The CPU is like the coach of a sports team. It makes all the decisions, tells everyone what to do, and coordinates all the action to achieve the goal.</p>
+                    </div>
+
+                    <div class="examples-container">
+                        <p class="example-title">Example in Use:</p>
+                        <p>"When you click to open a game, the <strong>CPU</strong> processes your click and instructs the system to load the game from storage into memory."</p>
+                    </div>
+
+                    <div class="related-terms">
+                        <p class="related-terms-title">Related Terms:</p>
+                        <span class="related-term">Processor</span>
+                        <span class="related-term">Core</span>
+                        <span class="related-term">Clock speed</span>
+                        <span class="related-term">Instructions</span>
+                        <span class="related-term">Processing power</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RAM Section -->
+            <div class="skill-card" data-keywords="ram random access memory temporary storage working space quick access volatile">
+                <div class="skill-header">
+                    <div class="skill-icon-container">
+                        <div class="skill-icon">
+                            <i class="fas fa-memory"></i>
+                        </div>
+                        <h3 class="skill-title">RAM (Random Access Memory)</h3>
+                    </div>
+                    <i class="fas fa-chevron-down toggle-arrow"></i>
+                </div>
+                <div class="skill-content">
+                    <div class="subsection-block">
+                        <h4 class="subsection-heading">Simple Definition</h4>
+                        <p>Temporary storage that holds information the computer is currently using, providing quick access for the CPU.</p>
+                    </div>
+
+                    <div class="subsection-block">
+                        <h4 class="subsection-heading">Detailed Definition</h4>
+                        <p>RAM is the computer's short-term memory. It temporarily stores data and programs that are currently being used, allowing the CPU to access them much faster than from permanent storage drives.</p>
+                    </div>
+
+                    <div class="subsection-block">
+                        <h4 class="subsection-heading">Characteristics of RAM</h4>
+                        <ul>
+                            <li><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 12px;"></i> <strong>Temporary storage:</strong> Loses all data when the computer is turned off</li>
+                            <li><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 12px;"></i> <strong>Very fast:</strong> CPU can access information almost instantly</li>
+                            <li><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 12px;"></i> <strong>Working space:</strong> Holds programs and data currently being used</li>
+                            <li><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 12px;"></i> <strong>Limited capacity:</strong> Usually much smaller than permanent storage</li>
+                        </ul>
+                    </div>
+
+                    <div class="subsection-block">
+                        <h4 class="subsection-heading">What RAM Does</h4>
+                        <ul>
+                            <li><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 12px;"></i> Stores programs while they're running</li>
+                            <li><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 12px;"></i> Holds data being actively worked on</li>
+                            <li><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 12px;"></i> Provides fast access for the CPU</li>
+                            <li><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 12px;"></i> Enables multitasking between different programs</li>
+                        </ul>
+                    </div>
+
+                    <div class="subsection-block">
+                        <h4 class="subsection-heading">Think of it Like</h4>
+                        <p>RAM is like your desk workspace. It holds the documents and tools you're currently working with for quick access, but you clear it off and put things away when you're done.</p>
+                    </div>
+
+                    <div class="examples-container">
+                        <p class="example-title">Example in Use:</p>
+                        <p>"When you open multiple browser tabs, they're all stored in <strong>RAM</strong> so you can switch between them quickly."</p>
+                    </div>
+
+                    <div class="related-terms">
+                        <p class="related-terms-title">Related Terms:</p>
+                        <span class="related-term">Volatile memory</span>
+                        <span class="related-term">System memory</span>
+                        <span class="related-term">Memory capacity</span>
+                        <span class="related-term">Multitasking</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Storage Drive Section -->
+            <div class="skill-card" data-keywords="storage drive permanent hdd ssd m.2 files programs save nonvolatile memory">
+                <div class="skill-header">
+                    <div class="skill-icon-container">
+                        <div class="skill-icon">
+                            <i class="fas fa-hdd"></i>
+                        </div>
+                        <h3 class="skill-title">Storage Drive</h3>
+                    </div>
+                    <i class="fas fa-chevron-down toggle-arrow"></i>
+                </div>
+                <div class="skill-content">
+                    <div class="subsection-block">
+                        <h4 class="subsection-heading">Simple Definition</h4>
+                        <p>A device that permanently stores files, programs, and data even when the computer is turned off.</p>
+                    </div>
+
+                    <div class="subsection-block">
+                        <h4 class="subsection-heading">Detailed Definition</h4>
+                        <p>Storage drives are non-volatile memory devices that keep all your files, programs, and the operating system safe permanently. Unlike RAM, they retain information even when power is removed.</p>
+                    </div>
+
+                    <div class="subsection-block">
+                        <h4 class="subsection-heading">Types of Storage Drives</h4>
+                        <ul>
+                            <li><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 12px;"></i> <strong>HDD (Hard Disk Drive):</strong> Uses spinning disks and magnetic storage</li>
+                            <li><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 12px;"></i> <strong>SSD (Solid State Drive):</strong> Uses flash memory chips, faster than HDD</li>
+                            <li><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 12px;"></i> <strong>M.2 Drive:</strong> Very fast, compact SSD that plugs directly into the motherboard</li>
+                        </ul>
+                    </div>
+
+                    <div class="subsection-block">
+                        <h4 class="subsection-heading">Characteristics of Storage</h4>
+                        <ul>
+                            <li><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 12px;"></i> <strong>Permanent storage:</strong> Keeps data when powered off</li>
+                            <li><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 12px;"></i> <strong>Slower than RAM:</strong> But much larger capacity</li>
+                            <li><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 12px;"></i> <strong>Long-term home:</strong> Stores all your files and programs</li>
+                            <li><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 12px;"></i> <strong>Non-volatile:</strong> Data persists without power</li>
+                        </ul>
+                    </div>
+
+                    <div class="subsection-block">
+                        <h4 class="subsection-heading">Think of it Like</h4>
+                        <p>Storage drives are like a filing cabinet where you keep all your important documents safe for the long term. You can always go back and find what you stored there.</p>
+                    </div>
+
+                    <div class="examples-container">
+                        <p class="example-title">Example in Use:</p>
+                        <p>"All your photos, music, and programs are saved on the <strong>storage drive</strong> so they're still there when you turn your computer back on."</p>
+                    </div>
+
+                    <div class="related-terms">
+                        <p class="related-terms-title">Related Terms:</p>
+                        <span class="related-term">Hard drive</span>
+                        <span class="related-term">Solid state drive</span>
+                        <span class="related-term">File system</span>
+                        <span class="related-term">Storage capacity</span>
+                        <span class="related-term">Non-volatile memory</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Motherboard Section -->
+            <div class="skill-card" data-keywords="motherboard main board connections components cpu ram storage ports connectors">
+                <div class="skill-header">
+                    <div class="skill-icon-container">
+                        <div class="skill-icon">
+                            <i class="fas fa-microchip"></i>
+                        </div>
+                        <h3 class="skill-title">Motherboard</h3>
+                    </div>
+                    <i class="fas fa-chevron-down toggle-arrow"></i>
+                </div>
+                <div class="skill-content">
+                    <div class="subsection-block">
+                        <h4 class="subsection-heading">Simple Definition</h4>
+                        <p>The main circuit board that connects all the computer components together.</p>
+                    </div>
+
+                    <div class="subsection-block">
+                        <h4 class="subsection-heading">Detailed Definition</h4>
+                        <p>The motherboard is like the foundation of a computer. It's a large circuit board that provides connections and communication pathways between all the different components of the computer system.</p>
+                    </div>
+
+                    <div class="subsection-block">
+                        <h4 class="subsection-heading">What's Connected to the Motherboard</h4>
+                        <ul>
+                            <li><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 12px;"></i> <strong>CPU Socket:</strong> Where the processor plugs in</li>
+                            <li><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 12px;"></i> <strong>RAM Slots:</strong> Where memory modules are installed</li>
+                            <li><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 12px;"></i> <strong>Storage Connectors:</strong> Links to hard drives and SSDs</li>
+                            <li><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 12px;"></i> <strong>I/O Ports:</strong> USB ports, audio jacks, network connections</li>
+                            <li><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 12px;"></i> <strong>Expansion Slots:</strong> For graphics cards and other add-on components</li>
+                        </ul>
+                    </div>
+
+                    <div class="subsection-block">
+                        <h4 class="subsection-heading">Why It's Important</h4>
+                        <ul>
+                            <li><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 12px;"></i> Provides power to all components</li>
+                            <li><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 12px;"></i> Enables communication between parts</li>
+                            <li><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 12px;"></i> Determines what components can be used</li>
+                            <li><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 12px;"></i> Houses essential circuits and controllers</li>
+                        </ul>
+                    </div>
+
+                    <div class="subsection-block">
+                        <h4 class="subsection-heading">Think of it Like</h4>
+                        <p>The motherboard is like the team's home base where all the players gather. It connects everyone together and provides the foundation for the whole system to work.</p>
+                    </div>
+
+                    <div class="examples-container">
+                        <p class="example-title">Example in Use:</p>
+                        <p>"When building a computer, the <strong>motherboard</strong> is installed first because every other component needs to connect to it."</p>
+                    </div>
+
+                    <div class="related-terms">
+                        <p class="related-terms-title">Related Terms:</p>
+                        <span class="related-term">Main board</span>
+                        <span class="related-term">Circuit board</span>
+                        <span class="related-term">System board</span>
+                        <span class="related-term">Socket</span>
+                        <span class="related-term">Expansion slot</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Input Device Section -->
+            <div class="skill-card" data-keywords="input device keyboard mouse microphone camera touch data entry information">
+                <div class="skill-header">
+                    <div class="skill-icon-container">
+                        <div class="skill-icon">
+                            <i class="fas fa-keyboard"></i>
+                        </div>
+                        <h3 class="skill-title">Input Device</h3>
+                    </div>
+                    <i class="fas fa-chevron-down toggle-arrow"></i>
+                </div>
+                <div class="skill-content">
+                    <div class="subsection-block">
+                        <h4 class="subsection-heading">Simple Definition</h4>
+                        <p>A device that allows you to put information INTO a computer system.</p>
+                    </div>
+
+                    <div class="subsection-block">
+                        <h4 class="subsection-heading">Detailed Definition</h4>
+                        <p>Input devices are hardware components that allow users to send data, instructions, or commands to a computer. They convert human actions or environmental data into digital signals the computer can understand.</p>
+                    </div>
+
+                    <div class="subsection-block">
+                        <h4 class="subsection-heading">Common Input Devices</h4>
+                        <ul>
+                            <li><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 12px;"></i> <strong>Keyboard:</strong> For typing text and entering commands</li>
+                            <li><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 12px;"></i> <strong>Mouse/Trackpad:</strong> For pointing, clicking, and navigation</li>
+                            <li><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 12px;"></i> <strong>Touchscreen:</strong> For direct interaction with the display</li>
+                            <li><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 12px;"></i> <strong>Microphone:</strong> For recording sound and voice commands</li>
+                            <li><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 12px;"></i> <strong>Camera:</strong> For capturing images and video</li>
+                            <li><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 12px;"></i> <strong>Scanner:</strong> For digitising printed documents</li>
+                        </ul>
+                    </div>
+
+                    <div class="subsection-block">
+                        <h4 class="subsection-heading">How Input Devices Work</h4>
+                        <ol>
+                            <li>User performs an action (typing, clicking, speaking)</li>
+                            <li>Device converts the action into digital signals</li>
+                            <li>Signals are sent to the computer for processing</li>
+                            <li>Computer interprets and responds to the input</li>
+                        </ol>
+                    </div>
+
+                    <div class="examples-container">
+                        <p class="example-title">Example in Use:</p>
+                        <p>"The <strong>input devices</strong> in our classroom include keyboards for typing and document cameras for displaying physical objects."</p>
+                    </div>
+
+                    <div class="related-terms">
+                        <p class="related-terms-title">Related Terms:</p>
+                        <span class="related-term">User interface</span>
+                        <span class="related-term">Human-computer interaction</span>
+                        <span class="related-term">Data entry</span>
+                        <span class="related-term">Peripheral device</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Output Device Section -->
+            <div class="skill-card" data-keywords="output device monitor screen speakers printer display information results">
+                <div class="skill-header">
+                    <div class="skill-icon-container">
+                        <div class="skill-icon">
+                            <i class="fas fa-desktop"></i>
+                        </div>
+                        <h3 class="skill-title">Output Device</h3>
+                    </div>
+                    <i class="fas fa-chevron-down toggle-arrow"></i>
+                </div>
+                <div class="skill-content">
+                    <div class="subsection-block">
+                        <h4 class="subsection-heading">Simple Definition</h4>
+                        <p>A device that displays or presents information FROM a computer system to the user.</p>
+                    </div>
+
+                    <div class="subsection-block">
+                        <h4 class="subsection-heading">Detailed Definition</h4>
+                        <p>Output devices are hardware components that convert digital information from a computer into forms that humans can perceive, such as visual displays, sounds, or printed material.</p>
+                    </div>
+
+                    <div class="subsection-block">
+                        <h4 class="subsection-heading">Common Output Devices</h4>
+                        <ul>
+                            <li><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 12px;"></i> <strong>Monitor/Screen:</strong> Displays visual information, text, and graphics</li>
+                            <li><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 12px;"></i> <strong>Speakers/Headphones:</strong> Output sound, music, and audio</li>
+                            <li><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 12px;"></i> <strong>Printer:</strong> Creates physical copies of digital documents</li>
+                            <li><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 12px;"></i> <strong>Projector:</strong> Displays images on large screens or walls</li>
+                            <li><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 12px;"></i> <strong>Haptic feedback:</strong> Vibrations or physical sensations (like phone vibration)</li>
+                        </ul>
+                    </div>
+
+                    <div class="subsection-block">
+                        <h4 class="subsection-heading">How Output Devices Work</h4>
+                        <ol>
+                            <li>Computer processes information and creates digital output</li>
+                            <li>Output device receives digital signals from computer</li>
+                            <li>Device converts digital signals into perceivable form</li>
+                            <li>User sees, hears, or feels the information</li>
+                        </ol>
+                    </div>
+
+                    <div class="subsection-block">
+                        <h4 class="subsection-heading">Types of Output</h4>
+                        <ul>
+                            <li><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 12px;"></i> <strong>Visual:</strong> Text, images, videos, graphics</li>
+                            <li><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 12px;"></i> <strong>Audio:</strong> Music, speech, sound effects, alerts</li>
+                            <li><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 12px;"></i> <strong>Physical:</strong> Printed documents, 3D models</li>
+                            <li><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 12px;"></i> <strong>Tactile:</strong> Vibrations, force feedback</li>
+                        </ul>
+                    </div>
+
+                    <div class="examples-container">
+                        <p class="example-title">Example in Use:</p>
+                        <p>"When you watch a video, you're using multiple <strong>output devices</strong> - the screen shows the images and the speakers play the sound."</p>
+                    </div>
+
+                    <div class="related-terms">
+                        <p class="related-terms-title">Related Terms:</p>
+                        <span class="related-term">Display device</span>
+                        <span class="related-term">Audio output</span>
+                        <span class="related-term">Visual output</span>
+                        <span class="related-term">Peripheral device</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- WiFi Section -->
+            <div class="skill-card" data-keywords="wifi wireless network connection internet access point signal radio waves">
+                <div class="skill-header">
+                    <div class="skill-icon-container">
+                        <div class="skill-icon">
+                            <i class="fas fa-wifi"></i>
+                        </div>
+                        <h3 class="skill-title">WiFi (Wireless Network)</h3>
+                    </div>
+                    <i class="fas fa-chevron-down toggle-arrow"></i>
+                </div>
+                <div class="skill-content">
+                    <div class="subsection-block">
+                        <h4 class="subsection-heading">Simple Definition</h4>
+                        <p>A technology that allows devices to connect to a network without using cables, through radio waves.</p>
+                    </div>
+
+                    <div class="subsection-block">
+                        <h4 class="subsection-heading">Detailed Definition</h4>
+                        <p>WiFi is a wireless networking technology that uses radio frequencies to connect devices to a network and the internet. It eliminates the need for physical cables by transmitting data through the air.</p>
+                    </div>
+
+                    <div class="subsection-block">
+                        <h4 class="subsection-heading">How WiFi Works</h4>
+                        <ol>
+                            <li>A router creates a WiFi signal using radio waves</li>
+                            <li>Devices with WiFi capability can detect this signal</li>
+                            <li>Devices connect to the network using a password</li>
+                            <li>Data is transmitted wirelessly between device and router</li>
+                        </ol>
+                    </div>
+
+                    <div class="subsection-block">
+                        <h4 class="subsection-heading">Advantages of WiFi</h4>
+                        <ul>
+                            <li><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 12px;"></i> <strong>No cables needed:</strong> Freedom to move around</li>
+                            <li><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 12px;"></i> <strong>Easy to connect:</strong> Simple setup for new devices</li>
+                            <li><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 12px;"></i> <strong>Multiple devices:</strong> Many devices can connect simultaneously</li>
+                            <li><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 12px;"></i> <strong>Convenient:</strong> Perfect for mobile devices like phones and tablets</li>
+                        </ul>
+                    </div>
+
+                    <div class="subsection-block">
+                        <h4 class="subsection-heading">Disadvantages of WiFi</h4>
+                        <ul>
+                            <li><i class="fas fa-times-circle" style="color: var(--bad-color); margin-right: 12px;"></i> <strong>Can be slower:</strong> May not be as fast as wired connections</li>
+                            <li><i class="fas fa-times-circle" style="color: var(--bad-color); margin-right: 12px;"></i> <strong>Range limitations:</strong> Signal weakens with distance</li>
+                            <li><i class="fas fa-times-circle" style="color: var(--bad-color); margin-right: 12px;"></i> <strong>Interference:</strong> Walls and other devices can block signals</li>
+                            <li><i class="fas fa-times-circle" style="color: var(--bad-color); margin-right: 12px;"></i> <strong>Security concerns:</strong> Wireless signals can potentially be intercepted</li>
+                        </ul>
+                    </div>
+
+                    <div class="examples-container">
+                        <p class="example-title">Example in Use:</p>
+                        <p>"Students can connect their tablets to the school's <strong>WiFi</strong> network to access online resources from anywhere in the classroom."</p>
+                    </div>
+
+                    <div class="related-terms">
+                        <p class="related-terms-title">Related Terms:</p>
+                        <span class="related-term">Wireless network</span>
+                        <span class="related-term">Access point</span>
+                        <span class="related-term">Radio frequency</span>
+                        <span class="related-term">Network security</span>
+                        <span class="related-term">Signal strength</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ethernet Cable Section -->
+            <div class="skill-card" data-keywords="ethernet cable wired connection network physical rj45 copper fast reliable">
+                <div class="skill-header">
+                    <div class="skill-icon-container">
+                        <div class="skill-icon">
+                            <i class="fas fa-ethernet"></i>
+                        </div>
+                        <h3 class="skill-title">Ethernet Cable</h3>
+                    </div>
+                    <i class="fas fa-chevron-down toggle-arrow"></i>
+                </div>
+                <div class="skill-content">
+                    <div class="subsection-block">
+                        <h4 class="subsection-heading">Simple Definition</h4>
+                        <p>A physical cable that connects devices directly to a network using electrical signals through copper wires.</p>
+                    </div>
+
+                    <div class="subsection-block">
+                        <h4 class="subsection-heading">Detailed Definition</h4>
+                        <p>Ethernet cables are the standard wired connection method for networks. They use twisted pairs of copper wires to transmit data between devices and network equipment like switches and routers.</p>
+                    </div>
+
+                    <div class="subsection-block">
+                        <h4 class="subsection-heading">How Ethernet Cables Work</h4>
+                        <ul>
+                            <li><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 12px;"></i> <strong>Electrical signals:</strong> Data is sent as electrical pulses through copper wires</li>
+                            <li><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 12px;"></i> <strong>Twisted pairs:</strong> Wires are twisted to reduce interference</li>
+                            <li><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 12px;"></i> <strong>RJ45 connectors:</strong> Standard plugs that fit into ethernet ports</li>
+                            <li><i class="fas fa-check-circle" style="color: var(--accent-color); margin-right: 12px;"></i> <strong>Point-to-point:</strong> Creates direct connection between two devices</li>
+                        </ul>
+                    </div>
+
+                    <div class="subsection-block">
+                        <h4 class="subsection-heading">Advantages of Ethernet</h4>
+                        <ul>
+                            <li><i class="fas fa-check-circle" style="color: var(--good-color); margin-right: 12px;"></i> <strong>Very fast and reliable:</strong> Consistent high-speed data transfer</li>
+                            <li><i class="fas fa-check-circle" style="color: var(--good-color); margin-right: 12px;"></i> <strong>Stable connection:</strong> Not affected by interference</li>
+                            <li><i class="fas fa-check-circle" style="color: var(--good-color); margin-right: 12px;"></i> <strong>More secure:</strong> Harder to intercept than wireless signals</li>
+                            <li><i class="fas fa-check-circle" style="color: var(--good-color); margin-right: 12px;"></i> <strong>No signal drops:</strong> Maintains consistent connection</li>
+                        </ul>
+                    </div>
+
+                    <div class="subsection-block">
+                        <h4 class="subsection-heading">Disadvantages of Ethernet</h4>
+                        <ul>
+                            <li><i class="fas fa-times-circle" style="color: var(--bad-color); margin-right: 12px;"></i> <strong>Needs cables everywhere:</strong> Physical cables must be run to each device</li>
+                            <li><i class="fas fa-times-circle" style="color: var(--bad-color); margin-right: 12px;"></i> <strong>Limited mobility:</strong> Devices are tied to cable length</li>
+                            <li><i class="fas fa-times-circle" style="color: var(--bad-color); margin-right: 12px;"></i> <strong>Installation cost:</strong> More expensive to set up initially</li>
+                        </ul>
+                    </div>
+
+                    <div class="examples-container">
+                        <p class="example-title">Example in Use:</p>
+                        <p>"The desktop computers in our classroom use <strong>ethernet cables</strong> to ensure they have fast, reliable connections to the school network."</p>
+                    </div>
+
+                    <div class="related-terms">
+                        <p class="related-terms-title">Related Terms:</p>
+                        <span class="related-term">Wired network</span>
+                        <span class="related-term">Network cable</span>
+                        <span class="related-term">RJ45 connector</span>
+                        <span class="related-term">Copper wire</span>
+                        <span class="related-term">Network port</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // Boolean to control clipboard functionality
+        const enableClipboardButtons = true;
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            // Skill card expandable content
+            const skillHeaders = document.querySelectorAll('.skill-header');
+            const searchInput = document.getElementById('search-input');
+            const skillsContainer = document.getElementById('skills-container');
+            const skillCards = document.querySelectorAll('.skill-card');
+            const resultsInfo = document.getElementById('results-info');
+            const resultsCount = document.getElementById('results-count');
+            const searchTerm = document.getElementById('search-term');
+            
+            // Toggle skill content
+            skillHeaders.forEach(header => {
+                header.addEventListener('click', function() {
+                    const content = this.nextElementSibling;
+                    const arrow = this.querySelector('.toggle-arrow');
+                    
+                    if (content.classList.contains('active')) {
+                        content.classList.remove('active');
+                        arrow.classList.remove('rotate-arrow');
+                    } else {
+                        content.classList.add('active');
+                        arrow.classList.add('rotate-arrow');
+                    }
+                });
+            });
+            
+            // Search functionality
+            searchInput.addEventListener('input', function() {
+                const query = this.value.toLowerCase().trim();
+                let matchCount = 0;
+                
+                // Show/hide results info based on search query
+                if (query.length > 0) {
+                    resultsInfo.style.display = 'block';
+                    searchTerm.textContent = query;
+                } else {
+                    resultsInfo.style.display = 'none';
+                }
+                
+                skillCards.forEach(card => {
+                    const cardTitle = card.querySelector('.skill-title').textContent.toLowerCase();
+                    const cardContent = card.textContent.toLowerCase();
+                    const cardKeywords = card.getAttribute('data-keywords').toLowerCase();
+                    
+                    // Check if card matches the search
+                    if (query === '' || 
+                        cardTitle.includes(query) || cardContent.includes(query) || 
+                        cardKeywords.includes(query)) {
+                        card.classList.remove('hidden');
+                        matchCount++;
+                    } else {
+                        card.classList.add('hidden');
+                    }
+                });
+                
+                // Update results count
+                resultsCount.textContent = matchCount;
+                
+                // If there's only one result, expand it automatically
+                if (matchCount === 1 && query !== '') {
+                    const visibleCard = document.querySelector('.skill-card:not(.hidden)');
+                    const content = visibleCard.querySelector('.skill-content');
+                    const arrow = visibleCard.querySelector('.toggle-arrow');
+                    
+                    if (!content.classList.contains('active')) {
+                        content.classList.add('active');
+                        arrow.classList.add('rotate-arrow');
+                    }
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
