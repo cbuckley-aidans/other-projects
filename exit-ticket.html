@@ -73,6 +73,42 @@
             margin-bottom: 15px;
         }
         
+        /* View toggle styling */
+        .view-toggle {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 4px;
+            border: 2px solid #dee2e6;
+        }
+        
+        .toggle-btn {
+            background: transparent;
+            color: #6c757d;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            flex: 1;
+            margin: 0 2px;
+        }
+        
+        .toggle-btn:hover {
+            color: #0a2351;
+            background: rgba(10, 35, 81, 0.1);
+        }
+        
+        .toggle-btn.active {
+            background: #0a2351;
+            color: white;
+            transform: none;
+        }
+        
         /* Edit button styling */
         .edit-btn {
             background: #0a2351;
@@ -460,22 +496,32 @@
     <div class="main-container">
         <!-- Content Column (2/3) -->
         <div class="content-column">
+            <!-- View Toggle -->
+            <div class="view-toggle">
+                <button class="toggle-btn active" id="recapBtn" onclick="switchView('recap')">
+                    <i class="fas fa-history"></i> Recap
+                </button>
+                <button class="toggle-btn" id="exitBtn" onclick="switchView('exit')">
+                    <i class="fas fa-ticket-alt"></i> Exit Ticket
+                </button>
+            </div>
+            
             <!-- Main Header -->
-            <h1>Exit Ticket <i class="fas fa-ticket-alt" style="margin-left: 15px;"></i></h1>
+            <h1 id="pageTitle">Recap <i class="fas fa-history" style="margin-left: 15px;"></i></h1>
             <div class="title-underline"></div>
             
             <!-- Edit Button -->
             <div style="text-align: center; margin-bottom: 15px;">
-                <button class="edit-btn" onclick="openEditModal()">
+                <button class="edit-btn" id="editButton" onclick="openEditModal()">
                     <i class="fas fa-edit"></i> Edit Questions
                 </button>
             </div>
             
             <!-- Preface -->
             <div class="preface-box">
-                <p class="preface-text">
-                    <i class="fas fa-exclamation-circle" style="margin-right: 10px;"></i>
-                    For question 3 on your exit ticket form, ignore the default questions and answer the following:
+                <p class="preface-text" id="prefaceText">
+                    <i class="fas fa-users" style="margin-right: 10px;"></i>
+                    Think-Pair-Share for 2 minutes. Be ready to be called upon to share with the class!
                 </p>
             </div>
             
@@ -547,27 +593,43 @@
 
     <script>
         // Timer functionality
-        let timerDuration = 10 * 60; // 10 minutes in seconds
-        let currentTime = timerDuration;
+        let timerDurations = {
+            recap: 2 * 60, // 3 minutes
+            exit: 10 * 60  // 10 minutes
+        };
+        let currentTimes = {
+            recap: timerDurations.recap,
+            exit: timerDurations.exit
+        };
         let isRunning = false;
         let timerInterval;
+        let currentView = 'recap';
         
         // Default questions
-        const defaultQuestions = [
-            "If you had to explain to someone what you learnt today using simple language, what would you say?",
-            "What was the most challenging thing for you today?",
-            "What is one question you have?"
-        ];
+        const defaultQuestions = {
+            recap: [
+                "In 30 seconds, explain the key concept from yesterday's lesson to your partner.",
+                "Share one 'lightbulb moment' or connection you made during our last class.",
+                "What's one thing from yesterday that you want to know more about?",
+                "Give your partner a quick example of how yesterday's topic applies to real life.",
+                "What was the most challenging part of yesterday's lesson? Discuss strategies to tackle it."
+            ],
+            exit: [
+                "If you had to explain to someone what you learnt today using simple language, what would you say?",
+                "What was the most challenging thing for you today?",
+                "What is one question you have?"
+            ]
+        };
         
         // Load questions from storage or use defaults
-        function loadQuestions() {
-            const stored = localStorage.getItem('exitTicketQuestions');
-            return stored ? JSON.parse(stored) : [...defaultQuestions];
+        function loadQuestions(view) {
+            const stored = localStorage.getItem(`${view}Questions`);
+            return stored ? JSON.parse(stored) : [...defaultQuestions[view]];
         }
         
         // Save questions to storage
-        function saveQuestionsToStorage(questions) {
-            localStorage.setItem('exitTicketQuestions', JSON.stringify(questions));
+        function saveQuestionsToStorage(view, questions) {
+            localStorage.setItem(`${view}Questions`, JSON.stringify(questions));
         }
         
         // Parse pipe-delimited text into questions array
@@ -582,9 +644,59 @@
             return questions.join(' | ');
         }
         
+        // Switch between views
+        function switchView(view) {
+            currentView = view;
+            
+            // Update toggle buttons
+            document.querySelectorAll('.toggle-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(view === 'recap' ? 'recapBtn' : 'exitBtn').classList.add('active');
+            
+            // Update title and icon
+            const title = document.getElementById('pageTitle');
+            const prefaceText = document.getElementById('prefaceText');
+            
+            if (view === 'recap') {
+                title.innerHTML = 'Recap <i class="fas fa-history" style="margin-left: 15px;"></i>';
+                prefaceText.innerHTML = `
+                    <i class="fas fa-users" style="margin-right: 10px;"></i>
+                    Think-Pair-Share for 2 minutes. Be ready to be called upon to share with the class!
+                `;
+            } else {
+                title.innerHTML = 'Exit Ticket <i class="fas fa-ticket-alt" style="margin-left: 15px;"></i>';
+                prefaceText.innerHTML = `
+                    <i class="fas fa-exclamation-circle" style="margin-right: 10px;"></i>
+                    For question 3 on your exit ticket form, ignore the default questions and answer the following:
+                `;
+            }
+            
+            // Update timer dropdown options
+            const dropdown = document.getElementById('minuteSelect');
+            dropdown.innerHTML = '';
+            if (view === 'recap') {
+                dropdown.innerHTML = `
+                    <option value="2">2 min</option>
+                    <option value="3" selected>3 min</option>
+                    <option value="5">5 min</option>
+                    <option value="7">7 min</option>
+                `;
+            } else {
+                dropdown.innerHTML = `
+                    <option value="5">5 min</option>
+                    <option value="10" selected>10 min</option>
+                    <option value="15">15 min</option>
+                    <option value="20">20 min</option>
+                `;
+            }
+            
+            // Reset timer for current view
+            resetTimer();
+            renderQuestions();
+        }
+        
         // Render questions in main view
         function renderQuestions() {
-            const questions = loadQuestions();
+            const questions = loadQuestions(currentView);
             const container = document.querySelector('.questions-container');
             container.innerHTML = '';
             
@@ -624,8 +736,11 @@
         
         // Open edit modal
         function openEditModal() {
-            const questions = loadQuestions();
+            const questions = loadQuestions(currentView);
             const textarea = document.getElementById('questionsTextarea');
+            const modalTitle = document.querySelector('.modal-title');
+            
+            modalTitle.textContent = `Edit ${currentView === 'recap' ? 'Recap' : 'Exit Ticket'} Questions`;
             textarea.value = questionsToText(questions);
             updatePreview();
             document.getElementById('editModal').style.display = 'block';
@@ -646,7 +761,7 @@
                 return;
             }
             
-            saveQuestionsToStorage(questions);
+            saveQuestionsToStorage(currentView, questions);
             renderQuestions();
             closeEditModal();
         }
@@ -655,7 +770,7 @@
         function clearToDefaults() {
             if (confirm('Are you sure you want to reset all questions to defaults? This cannot be undone.')) {
                 const textarea = document.getElementById('questionsTextarea');
-                textarea.value = questionsToText(defaultQuestions);
+                textarea.value = questionsToText(defaultQuestions[currentView]);
                 updatePreview();
             }
         }
@@ -670,6 +785,7 @@
         
         // Timer functions
         function updateDisplay() {
+            const currentTime = currentTimes[currentView];
             const minutes = Math.floor(currentTime / 60);
             const seconds = currentTime % 60;
             document.getElementById('timer').textContent = 
@@ -693,8 +809,8 @@
         }
         
         function setTimer(minutes) {
-            timerDuration = minutes * 60;
-            currentTime = timerDuration;
+            timerDurations[currentView] = minutes * 60;
+            currentTimes[currentView] = timerDurations[currentView];
             isRunning = false;
             clearInterval(timerInterval);
             updateDisplay();
@@ -713,8 +829,8 @@
                 startBtn.innerHTML = '<i class="fas fa-pause"></i>';
                 
                 timerInterval = setInterval(() => {
-                    if (currentTime > 0) {
-                        currentTime--;
+                    if (currentTimes[currentView] > 0) {
+                        currentTimes[currentView]--;
                         updateDisplay();
                     } else {
                         // Timer finished
@@ -742,7 +858,7 @@
         function resetTimer() {
             clearInterval(timerInterval);
             isRunning = false;
-            currentTime = timerDuration;
+            currentTimes[currentView] = timerDurations[currentView];
             updateDisplay();
             
             const startBtn = document.querySelector('.timer-btn:nth-child(2)');
@@ -753,8 +869,7 @@
         }
         
         // Initialize
-        updateDisplay();
-        renderQuestions();
+        switchView('recap'); // Start with recap view
         
         // Add pulse animation styles
         const style = document.createElement('style');
